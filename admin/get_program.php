@@ -25,4 +25,3 @@ if(mysqli_num_rows($program) > 0){
 }
 
 mysqli_close($conn);
-?>

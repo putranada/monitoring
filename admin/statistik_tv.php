@@ -24,9 +24,8 @@ $result = mysqli_query($conn, $query);
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Statistik Pelanggaran TV | KPID Kalsel</title>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-        <link rel="shortcut icon" href="../dist/img/user.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="shortcut icon" href="../dist/img/user.png">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -36,8 +35,8 @@ $result = mysqli_query($conn, $query);
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-        <?php include 'theme-header.php';?>
-        <?php include 'theme-sidebar.php';?>
+        <?php include 'theme-header.php'; ?>
+        <?php include 'theme-sidebar.php'; ?>
 
         <div class="content-wrapper">
             <section class="content-header">
@@ -61,9 +60,9 @@ $result = mysqli_query($conn, $query);
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                <a href="laporan-statistik-tv-print.php" target="_blank" class="btn btn-sm btn-primary">
-                                    <i class="fa fa-print"></i> &nbsp
-                                    PRINT</a>
+                                    <a href="laporan-statistik-tv-print.php" target="_blank" class="btn btn-sm btn-primary">
+                                        <i class="fa fa-print"></i> &nbsp
+                                        PRINT</a>
                                     <div class="card-body">
                                         <table id="example" class="table table-bordered table-striped">
                                             <thead>
@@ -77,18 +76,18 @@ $result = mysqli_query($conn, $query);
                                             </thead>
                                             <tbody>
                                                 <?php
-$no = 1;
-while ($row = mysqli_fetch_assoc($result)){ ?>
-                                                <tr>
-                                                    <td class="text-center" width="10%"><?php echo $no;?></td>
-                                                    <td><?php echo $row['nama_stasiun'];?></td>
-                                                    <td><?php echo $row['nama_program'];?></td>
-                                                    <td><?php echo $row['isi'];?></td>
-                                                    <td><?php echo $row['jumlah_pelanggaran'];?></td>
+                                                $no = 1;
+                                                while ($row = mysqli_fetch_assoc($result)) { ?>
+                                                    <tr>
+                                                        <td class="text-center" width="10%"><?php echo $no; ?></td>
+                                                        <td><?php echo $row['nama_stasiun']; ?></td>
+                                                        <td><?php echo $row['nama_program']; ?></td>
+                                                        <td><?php echo $row['isi']; ?></td>
+                                                        <td><?php echo $row['jumlah_pelanggaran']; ?></td>
 
-                                                </tr>
+                                                    </tr>
                                                 <?php $no++;
-}?>
+                                                } ?>
                                             </tbody>
 
                                         </table>
@@ -126,24 +125,24 @@ while ($row = mysqli_fetch_assoc($result)){ ?>
 
     <!-- Page specific script -->
     <script>
-    $(function() {
-        $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
         });
-    });
     </script>
     </div>
 </body>
-<?php include 'theme-footer.php';?>
+<?php include 'theme-footer.php'; ?>

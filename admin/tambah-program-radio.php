@@ -12,27 +12,27 @@ if (!isset($_SESSION['login'])) {
 include '../koneksi.php';
 
 date_default_timezone_set('Asia/Singapore');
-if (isset($_POST["submit"])){
+if (isset($_POST["submit"])) {
 
     $nama_program = htmlspecialchars($_POST["nama_program"]);
-     $radio = htmlspecialchars($_POST["radio"]);
+    $radio = htmlspecialchars($_POST["radio"]);
     // echo "INSERT INTO karyawan VALUES ('','$nik','$nama_lengkap','$handphone','$email','$tanggal_masuk','$pengguna_id')";
     $query = "INSERT INTO program_radio VALUES ('','$nama_program','$radio')";
     $simpan = mysqli_query($conn, $query);
 
-    if($simpan){
-    echo "<script type='text/javascript'>
+    if ($simpan) {
+        echo "<script type='text/javascript'>
     alert('Data Berhasil Disimpan');
     document.location.href = 'program_radio.php'
     </script>
-    "; 
-} else {
-    echo "<script type='text/javascript'>
+    ";
+    } else {
+        echo "<script type='text/javascript'>
     alert('Data gagal disimpan');
     document.location.href = 'tambah-program-radio.php'
     </script>
     ";
-}
+    }
 }
 
 ?>
@@ -43,9 +43,8 @@ if (isset($_POST["submit"])){
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tambah Data Program Radio | KPID Kalsel</title>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-        <link rel="shortcut icon" href="../dist/img/user.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="shortcut icon" href="../dist/img/user.png">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -90,26 +89,24 @@ if (isset($_POST["submit"])){
                                     <div class="card-body">
                                         <div class="form-grup">
                                             <label for="nama_program">Nama Program : </label>
-                                            <input type="text" class="form-control" id="nama_program"
-                                                name="nama_program" placeholder="Masukkan Nama Program Radio" required>
+                                            <input type="text" class="form-control" id="nama_program" name="nama_program" placeholder="Masukkan Nama Program Radio" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Stasiun Radio</label>
                                             <select name="radio" class="form-control" required="required">
                                                 <option value="">- Pilih -</option>
                                                 <?php
-                                                    $radio = mysqli_query($conn, "SELECT * FROM data_radio ORDER BY nama_stasiun ASC");
-                                                    while ($k = mysqli_fetch_array($radio)) {
-                                                    ?>
-                                                <option value="<?php echo $k['id_radio']; ?>">
-                                                    <?php echo $k['nama_stasiun']; ?></option>
+                                                $radio = mysqli_query($conn, "SELECT * FROM data_radio ORDER BY nama_stasiun ASC");
+                                                while ($k = mysqli_fetch_array($radio)) {
+                                                ?>
+                                                    <option value="<?php echo $k['id_radio']; ?>">
+                                                        <?php echo $k['nama_stasiun']; ?></option>
                                                 <?php
-                                                    }
-                                                    ?>
+                                                }
+                                                ?>
                                             </select>
                                         </div>
-                                        <input type="hidden" id="id_program" name="id_program"
-                                            value="<?php echo $_SESSION["id"]; ?>">
+                                        <input type="hidden" id="id_program" name="id_program" value="<?php echo $_SESSION["id"]; ?>">
                                     </div>
                                     <div class="footer">
                                         <button class="btn btn-primary mr-1" type="submit" name="submit">Simpan</button>
@@ -153,25 +150,25 @@ if (isset($_POST["submit"])){
 
         <!-- Page specific script -->
         <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print"]
-            }).buttons().container().appendTo(
-                '#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
+            $(function() {
+                $("#example1").DataTable({
+                    "responsive": true,
+                    "lengthChange": false,
+                    "autoWidth": false,
+                    "buttons": ["copy", "csv", "excel", "pdf", "print"]
+                }).buttons().container().appendTo(
+                    '#example1_wrapper .col-md-6:eq(0)');
+                $('#example2').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": false,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
+                });
             });
-        });
         </script>
     </div>
 </body>
-<?php include 'theme-footer.php';?>
+<?php include 'theme-footer.php'; ?>

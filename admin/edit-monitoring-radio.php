@@ -15,26 +15,26 @@ $query_monitoring = "select * from monitoring_radio where id = '$id'";
 $result_monitoring = mysqli_query($conn, $query_monitoring);
 $row_monitoring = mysqli_fetch_assoc($result_monitoring);
 
-if(isset($_POST["submit"])){
-  $tgl = htmlspecialchars($_POST["tgl"]);
+if (isset($_POST["submit"])) {
+    $tgl = htmlspecialchars($_POST["tgl"]);
     $jam = htmlspecialchars($_POST["jam"]);
     $program = htmlspecialchars($_POST["program"]);
     $time = htmlspecialchars($_POST["time"]);
     $ket = htmlspecialchars($_POST["ket"]);
     $pasal = htmlspecialchars($_POST["pasal"]);
-         $radio = htmlspecialchars($_POST["radio"]);
-    
+    $radio = htmlspecialchars($_POST["radio"]);
+
     // echo "UPDATE monitoring SET tanggal = '$tgl', jam_tayang = '$jam', program = '$program', time_code = '$time', keterangan = '$ket', pasal = '$pasal' where id = '$id'";
     $query = "UPDATE monitoring_radio SET tanggal = '$tgl', jam_tayang = '$jam', program = '$program', time_code = '$time', keterangan = '$ket', pasal = '$pasal', radio = '$radio' where id = '$id'";
     $edit = mysqli_query($conn, $query);
-    if($edit){
-    echo "<script type='text/javascript'>
+    if ($edit) {
+        echo "<script type='text/javascript'>
     alert('Data Berhasil Disimpan');
     document.location.href = 'monitoring_radio.php';
     </script>
-    "; 
-} else {
-    echo "<script type='text/javascript'>
+    ";
+    } else {
+        echo "<script type='text/javascript'>
     alert('Data gagal disimpan');
     document.location.href = 'edit-monitoring-radio.php?id='$id';
     </script>
@@ -50,9 +50,8 @@ if(isset($_POST["submit"])){
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Edit Monitoring Radio | KPID Kalsel</title>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-        <link rel="shortcut icon" href="../dist/img/user.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="shortcut icon" href="../dist/img/user.png">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -98,73 +97,64 @@ if(isset($_POST["submit"])){
                                     <div class="card-body">
                                         <div class="form-grup">
                                             <label for="tgl">TANGGAL : </label>
-                                            <input type="date" class="form-control" id="tgl" name="tgl"
-                                                value="<?php echo $row_monitoring['tanggal']; ?>"
-                                                placeholder="Masukkan monitoring" required>
+                                            <input type="date" class="form-control" id="tgl" name="tgl" value="<?php echo $row_monitoring['tanggal']; ?>" placeholder="Masukkan monitoring" required>
                                         </div>
                                         <div class="form-grup">
                                             <label for="timecode">JAM TAYANG : </label>
-                                            <input type="text" class="form-control" id="jam" name="jam"
-                                                value="<?php echo $row_monitoring['jam_tayang']; ?>"
-                                                placeholder="Masukkan Jam Tayang Monitoring" required>
+                                            <input type="text" class="form-control" id="jam" name="jam" value="<?php echo $row_monitoring['jam_tayang']; ?>" placeholder="Masukkan Jam Tayang Monitoring" required>
                                         </div>
                                         <div class="form-group">
                                             <label>RADIO :</label>
                                             <select name="radio" class="form-control" required="required">
                                                 <?php
-                                                    $pro = mysqli_query($conn, "SELECT * FROM data_radio ORDER BY nama_stasiun ASC");
-                                                    while ($k = mysqli_fetch_array($pro)) {
-                                                    ?>
-                                                <option value="<?php echo $k['id_radio']; ?>">
-                                                    <?php echo $k['nama_stasiun']; ?></option>
+                                                $pro = mysqli_query($conn, "SELECT * FROM data_radio ORDER BY nama_stasiun ASC");
+                                                while ($k = mysqli_fetch_array($pro)) {
+                                                ?>
+                                                    <option value="<?php echo $k['id_radio']; ?>">
+                                                        <?php echo $k['nama_stasiun']; ?></option>
                                                 <?php
-                                                    }
-                                                    ?>
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label>PROGRAM :</label>
                                             <select name="program" class="form-control" required="required">
                                                 <?php
-                                                    $pro = mysqli_query($conn, "SELECT * FROM program_radio ORDER BY nama_program ASC");
-                                                    while ($k = mysqli_fetch_array($pro)) {
-                                                    ?>
-                                                <option value="<?php echo $k['id_program']; ?>">
-                                                    <?php echo $k['nama_program']; ?></option>
+                                                $pro = mysqli_query($conn, "SELECT * FROM program_radio ORDER BY nama_program ASC");
+                                                while ($k = mysqli_fetch_array($pro)) {
+                                                ?>
+                                                    <option value="<?php echo $k['id_program']; ?>">
+                                                        <?php echo $k['nama_program']; ?></option>
                                                 <?php
-                                                    }
-                                                    ?>
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                         <div class="form-grup">
                                             <label for="timecode">TIME CODE : </label>
-                                            <input type="text" class="form-control" id="time" name="time"
-                                                value="<?php echo $row_monitoring['time_code']; ?>"
-                                                placeholder="Masukkan Time Code Monitoring" required>
+                                            <input type="text" class="form-control" id="time" name="time" value="<?php echo $row_monitoring['time_code']; ?>" placeholder="Masukkan Time Code Monitoring" required>
                                         </div>
                                         <div class="form-grup">
                                             <label for="ket">KETERANGAN : </label>
-                                            <input type="text" class="form-control" id="ket" name="ket"
-                                                value="<?php echo $row_monitoring['keterangan']; ?>"
-                                                placeholder="Masukkan Keterangan" required>
+                                            <input type="text" class="form-control" id="ket" name="ket" value="<?php echo $row_monitoring['keterangan']; ?>" placeholder="Masukkan Keterangan" required>
                                         </div>
                                         <div class="form-group">
                                             <label>PASAL :</label>
                                             <select name="pasal" class="form-control" required="required">
                                                 <?php
-                                                    $pasal = mysqli_query($conn, "SELECT * FROM pasal ORDER BY id ASC");
-                                                    while ($k = mysqli_fetch_array($pasal)) {
-                                                    ?>
-                                                <option value="<?php echo $k['id']; ?>">
-                                                    <?php echo $k['pasal']; ?></option>
+                                                $pasal = mysqli_query($conn, "SELECT * FROM pasal ORDER BY id ASC");
+                                                while ($k = mysqli_fetch_array($pasal)) {
+                                                ?>
+                                                    <option value="<?php echo $k['id']; ?>">
+                                                        <?php echo $k['pasal']; ?></option>
                                                 <?php
-                                                    }
-                                                    ?>
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                         <div class="footer">
-                                            <button class="btn btn-primary mr-1" type="submit"
-                                                name="submit">Simpan</button>
+                                            <button class="btn btn-primary mr-1" type="submit" name="submit">Simpan</button>
                                             <a href="monitoring_radio.php" class="btn btn-secondary mr-1">Batal</a>
                                         </div>
                                 </form>
@@ -197,24 +187,24 @@ if(isset($_POST["submit"])){
 
         <!-- Page specific script -->
         <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
+            $(function() {
+                $("#example1").DataTable({
+                    "responsive": true,
+                    "lengthChange": false,
+                    "autoWidth": false,
+                    "buttons": ["copy", "csv", "excel", "pdf", "print"]
+                }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+                $('#example2').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": false,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
+                });
             });
-        });
         </script>
     </div>
 </body>
-<?php include 'theme-footer.php';?>
+<?php include 'theme-footer.php'; ?>

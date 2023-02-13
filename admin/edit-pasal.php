@@ -15,20 +15,20 @@ $query_pasal = "select * from pasal where id = '$id'";
 $result_pasal = mysqli_query($conn, $query_pasal);
 $row_pasal = mysqli_fetch_assoc($result_pasal);
 
-if(isset($_POST["submit"])){
+if (isset($_POST["submit"])) {
     $id_bab = htmlspecialchars($_POST["id_bab"]);
     $pasal = htmlspecialchars($_POST["pasal"]);
     $isi = htmlspecialchars($_POST["isi"]);
     $query = "UPDATE pasal SET id_bab = '$id_bab',pasal = '$pasal',isi = '$isi' where id = '$id'";
     $edit = mysqli_query($conn, $query);
-    if($edit){
-    echo "<script type='text/javascript'>
+    if ($edit) {
+        echo "<script type='text/javascript'>
     alert('Data Berhasil Disimpan');
     document.location.href = 'p3sps.php';
     </script>
-    "; 
-} else {
-    echo "<script type='text/javascript'>
+    ";
+    } else {
+        echo "<script type='text/javascript'>
     alert('Data gagal disimpan');
     document.location.href = 'edit-pasal.php?id='$id';
     </script>
@@ -44,9 +44,8 @@ if(isset($_POST["submit"])){
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Edit Pasal P3SPS | KPID Kalsel</title>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-        <link rel="shortcut icon" href="../dist/img/user.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="shortcut icon" href="../dist/img/user.png">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -94,32 +93,27 @@ if(isset($_POST["submit"])){
                                             <label>BAB</label>
                                             <select name="id_bab" class="form-control" required="required">
                                                 <?php
-                                                    $bab = mysqli_query($conn, "SELECT * FROM bab ORDER BY bab ASC");
-                                                    while ($k = mysqli_fetch_array($bab)) {
-                                                    ?>
-                                                <option value="<?php echo $k['id_bab']; ?>">
-                                                    <?php echo $k['bab']; ?></option>
+                                                $bab = mysqli_query($conn, "SELECT * FROM bab ORDER BY bab ASC");
+                                                while ($k = mysqli_fetch_array($bab)) {
+                                                ?>
+                                                    <option value="<?php echo $k['id_bab']; ?>">
+                                                        <?php echo $k['bab']; ?></option>
                                                 <?php
-                                                    }
-                                                    ?>
+                                                }
+                                                ?>
                                             </select>
                                         </div>
 
                                         <div class="form-grup">
                                             <label for="pasal">PASAL : </label>
-                                            <input type="text" class="form-control" id="pasal" name="pasal"
-                                                value="<?php echo $row_pasal['pasal']; ?>" placeholder="Masukkan pasal"
-                                                required>
+                                            <input type="text" class="form-control" id="pasal" name="pasal" value="<?php echo $row_pasal['pasal']; ?>" placeholder="Masukkan pasal" required>
                                         </div>
                                         <div class="form-grup">
                                             <label for="isi">ISI : </label>
-                                            <input type="text" class="form-control" id="isi" name="isi"
-                                                value="<?php echo $row_pasal['isi']; ?>" placeholder="Isi pasal"
-                                                required>
+                                            <input type="text" class="form-control" id="isi" name="isi" value="<?php echo $row_pasal['isi']; ?>" placeholder="Isi pasal" required>
                                         </div>
                                         <div class="footer">
-                                            <button class="btn btn-primary mr-1" type="submit"
-                                                name="submit">Simpan</button>
+                                            <button class="btn btn-primary mr-1" type="submit" name="submit">Simpan</button>
                                             <a href="p3sps.php" class="btn btn-secondary mr-1">Batal</a>
                                         </div>
                                 </form>
@@ -152,24 +146,24 @@ if(isset($_POST["submit"])){
 
         <!-- Page specific script -->
         <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
+            $(function() {
+                $("#example1").DataTable({
+                    "responsive": true,
+                    "lengthChange": false,
+                    "autoWidth": false,
+                    "buttons": ["copy", "csv", "excel", "pdf", "print"]
+                }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+                $('#example2').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": false,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
+                });
             });
-        });
         </script>
     </div>
 </body>
-<?php include 'theme-footer.php';?>
+<?php include 'theme-footer.php'; ?>

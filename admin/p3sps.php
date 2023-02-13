@@ -20,9 +20,8 @@ $result = mysqli_query($conn, $query);
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>P3SPS | KPID Kalsel</title>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-        <link rel="shortcut icon" href="../dist/img/user.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="shortcut icon" href="../dist/img/user.png">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -32,8 +31,8 @@ $result = mysqli_query($conn, $query);
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-        <?php include 'theme-header.php';?>
-        <?php include 'theme-sidebar.php';?>
+        <?php include 'theme-header.php'; ?>
+        <?php include 'theme-sidebar.php'; ?>
 
         <div class="content-wrapper">
             <section class="content-header">
@@ -71,24 +70,22 @@ $result = mysqli_query($conn, $query);
                                             </thead>
                                             <tbody>
                                                 <?php
-$no = 1;
-while ($row = mysqli_fetch_assoc($result)){ ?>
-                                                <tr>
-                                                    <td class="text-center" width="10%"><?php echo $no;?></td>
-                                                    <td>
-                                                        <a href="edit-bab.php?id=<?php echo $row['id_bab'];?>"
-                                                            class="btn btn-success btn-xs mr-1"><i class="fa fa-edit">
-                                                                Ubah</i> </a>
-                                                        <a href="hapus-bab.php?id=<?php echo $row['id_bab'];?>"
-                                                            class="btn btn-danger btn-xs mr-1"><i class="fa fa-trash">
-                                                                Hapus</i> </a>
-                                                    </td>
+                                                $no = 1;
+                                                while ($row = mysqli_fetch_assoc($result)) { ?>
+                                                    <tr>
+                                                        <td class="text-center" width="10%"><?php echo $no; ?></td>
+                                                        <td>
+                                                            <a href="edit-bab.php?id=<?php echo $row['id_bab']; ?>" class="btn btn-success btn-xs mr-1"><i class="fa fa-edit">
+                                                                    Ubah</i> </a>
+                                                            <a href="hapus-bab.php?id=<?php echo $row['id_bab']; ?>" class="btn btn-danger btn-xs mr-1"><i class="fa fa-trash">
+                                                                    Hapus</i> </a>
+                                                        </td>
 
-                                                    <td><?php echo $row['bab'];?></td>
-                                                    <td><?php echo $row['judul'];?></td>
-                                                </tr>
+                                                        <td><?php echo $row['bab']; ?></td>
+                                                        <td><?php echo $row['judul']; ?></td>
+                                                    </tr>
                                                 <?php $no++;
-}?>
+                                                } ?>
                                             </tbody>
 
                                         </table>
@@ -101,12 +98,12 @@ while ($row = mysqli_fetch_assoc($result)){ ?>
             </section>
 
             <?php
-            
-$query = "SELECT pasal.*, bab.bab FROM pasal
-          JOIN bab ON pasal.id_bab = bab.id_bab";
-$result = mysqli_query($conn, $query);
 
-?>
+            $query = "SELECT pasal.*, bab.bab FROM pasal
+          JOIN bab ON pasal.id_bab = bab.id_bab";
+            $result = mysqli_query($conn, $query);
+
+            ?>
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
@@ -127,24 +124,22 @@ $result = mysqli_query($conn, $query);
                                             </thead>
                                             <tbody>
                                                 <?php
-$no = 1;
-while ($row = mysqli_fetch_assoc($result)){ ?>
-                                                <tr>
-                                                    <td class="text-center" width="10%"><?php echo $no;?></td>
-                                                    <td>
-                                                        <a href="edit-pasal.php?id=<?php echo $row['id'];?>"
-                                                            class="btn btn-success btn-xs mr-1"><i class="fa fa-edit">
-                                                                Ubah</i> </a>
-                                                        <a href="hapus-pasal.php?id=<?php echo $row['id'];?>"
-                                                            class="btn btn-danger btn-xs mr-1"><i class="fa fa-trash">
-                                                                Hapus</i> </a>
-                                                    </td>
+                                                $no = 1;
+                                                while ($row = mysqli_fetch_assoc($result)) { ?>
+                                                    <tr>
+                                                        <td class="text-center" width="10%"><?php echo $no; ?></td>
+                                                        <td>
+                                                            <a href="edit-pasal.php?id=<?php echo $row['id']; ?>" class="btn btn-success btn-xs mr-1"><i class="fa fa-edit">
+                                                                    Ubah</i> </a>
+                                                            <a href="hapus-pasal.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-xs mr-1"><i class="fa fa-trash">
+                                                                    Hapus</i> </a>
+                                                        </td>
 
-                                                    <td> <?php echo $row['bab'];?>, <?php echo $row['pasal'];?></td>
-                                                    <td> <?php echo $row['isi'];?></td>
-                                                </tr>
+                                                        <td> <?php echo $row['bab']; ?>, <?php echo $row['pasal']; ?></td>
+                                                        <td> <?php echo $row['isi']; ?></td>
+                                                    </tr>
                                                 <?php $no++;
-}?>
+                                                } ?>
                                             </tbody>
 
                                         </table>
@@ -182,24 +177,24 @@ while ($row = mysqli_fetch_assoc($result)){ ?>
 
     <!-- Page specific script -->
     <script>
-    $(function() {
-        $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
         });
-    });
     </script>
     </div>
 </body>
-<?php include 'theme-footer.php';?>
+<?php include 'theme-footer.php'; ?>

@@ -12,27 +12,27 @@ if (!isset($_SESSION['login'])) {
 include '../koneksi.php';
 
 date_default_timezone_set('Asia/Singapore');
-if (isset($_POST["submit"])){
-     $id_bab = htmlspecialchars($_POST["id_bab"]);
+if (isset($_POST["submit"])) {
+    $id_bab = htmlspecialchars($_POST["id_bab"]);
     $pasal = htmlspecialchars($_POST["pasal"]);
     $isi = htmlspecialchars($_POST["isi"]);
     // echo "INSERT INTO pasal VALUES ('','id_bab','$pasal','keterangan')";
     $query = "INSERT INTO pasal VALUES ('','$id_bab','$pasal','$isi')";
     $simpan = mysqli_query($conn, $query);
 
-    if($simpan){
-    echo "<script type='text/javascript'>
+    if ($simpan) {
+        echo "<script type='text/javascript'>
     alert('Data Berhasil Disimpan');
     document.location.href = 'p3sps.php'
     </script>
-    "; 
-} else {
-    echo "<script type='text/javascript'>
+    ";
+    } else {
+        echo "<script type='text/javascript'>
     alert('Data gagal disimpan');
     document.location.href = 'tambah-pasal.php'
     </script>
     ";
-}
+    }
 }
 
 ?>
@@ -43,9 +43,8 @@ if (isset($_POST["submit"])){
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tambah Pasal P3SPS | KPID Kalsel</title>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-        <link rel="shortcut icon" href="../dist/img/user.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="shortcut icon" href="../dist/img/user.png">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -93,25 +92,23 @@ if (isset($_POST["submit"])){
                                             <select name="id_bab" class="form-control" required="required">
                                                 <option value="">- Pilih -</option>
                                                 <?php
-                                                    $bab = mysqli_query($conn, "SELECT * FROM bab ORDER BY bab ASC");
-                                                    while ($k = mysqli_fetch_array($bab)) {
-                                                    ?>
-                                                <option value="<?php echo $k['id_bab']; ?>">
-                                                    <?php echo $k['bab']; ?></option>
+                                                $bab = mysqli_query($conn, "SELECT * FROM bab ORDER BY bab ASC");
+                                                while ($k = mysqli_fetch_array($bab)) {
+                                                ?>
+                                                    <option value="<?php echo $k['id_bab']; ?>">
+                                                        <?php echo $k['bab']; ?></option>
                                                 <?php
-                                                    }
-                                                    ?>
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                         <div class="form-grup">
                                             <label for="pasal">PASAL : </label>
-                                            <input type="text" class="form-control" id="pasal" name="pasal"
-                                                placeholder="Masukkan Pasal" required>
+                                            <input type="text" class="form-control" id="pasal" name="pasal" placeholder="Masukkan Pasal" required>
                                         </div>
                                         <div class="form-grup">
                                             <label for="isi">Keterangan : </label>
-                                            <input type="text" class="form-control" id="isi" name="isi"
-                                                placeholder="Masukkan keterangan" required>
+                                            <input type="text" class="form-control" id="isi" name="isi" placeholder="Masukkan keterangan" required>
                                         </div>
 
                                         <input type="hidden" id="id" name="id" value="<?php echo $_SESSION["id"]; ?>">
@@ -159,25 +156,25 @@ if (isset($_POST["submit"])){
 
         <!-- Page specific script -->
         <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print"]
-            }).buttons().container().appendTo(
-                '#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
+            $(function() {
+                $("#example1").DataTable({
+                    "responsive": true,
+                    "lengthChange": false,
+                    "autoWidth": false,
+                    "buttons": ["copy", "csv", "excel", "pdf", "print"]
+                }).buttons().container().appendTo(
+                    '#example1_wrapper .col-md-6:eq(0)');
+                $('#example2').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": false,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
+                });
             });
-        });
         </script>
     </div>
 </body>
-<?php include 'theme-footer.php';?>
+<?php include 'theme-footer.php'; ?>
