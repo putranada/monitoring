@@ -15,18 +15,18 @@ $query_program = "select * from program_radio where id_program = '$id'";
 $result_program = mysqli_query($conn, $query_program);
 $row_program = mysqli_fetch_assoc($result_program);
 
-if(isset($_POST["submit"])){
+if (isset($_POST["submit"])) {
     $nama_program = htmlspecialchars($_POST["nama_program"]);
     $query = "UPDATE program_radio SET nama_program = '$nama_program' where id_program = '$id'";
     $edit = mysqli_query($conn, $query);
-    if($edit){
-    echo "<script type='text/javascript'>
+    if ($edit) {
+        echo "<script type='text/javascript'>
     alert('Data Berhasil Disimpan');
     document.location.href = 'program_radio.php';
     </script>
-    "; 
-} else {
-    echo "<script type='text/javascript'>
+    ";
+    } else {
+        echo "<script type='text/javascript'>
     alert('Data gagal disimpan');
     document.location.href = 'edit-program-radio.php?id='$id';
     </script>
@@ -42,9 +42,8 @@ if(isset($_POST["submit"])){
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Edit Program Radio | KPID Kalsel</title>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-        <link rel="shortcut icon" href="../dist/img/user.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="shortcut icon" href="../dist/img/user.png">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -90,13 +89,10 @@ if(isset($_POST["submit"])){
                                     <div class="card-body">
                                         <div class="form-grup">
                                             <label for="Nama Program">Nama Program : </label>
-                                            <input type="text" class="form-control" id="nama_program"
-                                                name="nama_program" value="<?php echo $row_program['nama_program']; ?>"
-                                                placeholder="Nama program..." required>
+                                            <input type="text" class="form-control" id="nama_program" name="nama_program" value="<?php echo $row_program['nama_program']; ?>" placeholder="Nama program..." required>
                                         </div>
                                         <div class="footer">
-                                            <button class="btn btn-primary mr-1" type="submit"
-                                                name="submit">Simpan</button>
+                                            <button class="btn btn-primary mr-1" type="submit" name="submit">Simpan</button>
                                             <a href="program_tv.php" class="btn btn-secondary mr-1">Batal</a>
                                         </div>
                                 </form>
@@ -129,24 +125,24 @@ if(isset($_POST["submit"])){
 
         <!-- Page specific script -->
         <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
+            $(function() {
+                $("#example1").DataTable({
+                    "responsive": true,
+                    "lengthChange": false,
+                    "autoWidth": false,
+                    "buttons": ["copy", "csv", "excel", "pdf", "print"]
+                }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+                $('#example2').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": false,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
+                });
             });
-        });
         </script>
     </div>
 </body>
-<?php include 'theme-footer.php';?>
+<?php include 'theme-footer.php'; ?>

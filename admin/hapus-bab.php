@@ -20,4 +20,3 @@ if($delete){
     document.location.href = 'p3sps.php';
     </script> ";
 }
-?>

@@ -28,127 +28,127 @@
      </center>
      <hr>
      <?php
-     include '../koneksi.php';
+        include '../koneksi.php';
 
-     if (isset($_GET['id_pelanggaran'])) {
-         $tv = $_GET['id_pelanggaran'];
+        if (isset($_GET['id_pelanggaran'])) {
+            $tv = $_GET['id_pelanggaran'];
 
-         ?>
+        ?>
 
-     <p align="center"><b>LAPORAN DATA PELANGGARAN PROGRAM TV</b></p>
-     <table>
-         <td width="150px">PELANGGARAN PROGRAM TV</td>
-         <td width="2px">:</td>
-         <td>
+         <p align="center"><b>LAPORAN DATA PELANGGARAN PROGRAM TV</b></p>
+         <table>
+             <td width="150px">PELANGGARAN PROGRAM TV</td>
+             <td width="2px">:</td>
+             <td>
              <?php
-             $k = mysqli_query($conn, "select * from pelanggaran_tv where id_pelanggaran='$pelanggaran'");
-             $kk = mysqli_fetch_assoc($k);
-             echo $kk['nama_program'];
-     }
-                                ?>
+                $k = mysqli_query($conn, "select * from pelanggaran_tv where id_pelanggaran='$pelanggaran'");
+                $kk = mysqli_fetch_assoc($k);
+                echo $kk['nama_program'];
+            }
+                ?>
 
-         </td>
-         </tr>
-     </table>
+             </td>
+             </tr>
+         </table>
 
-     </div>
-     </div>
-     <?php
-     if (isset($_GET['id_program'])) {
-         $program = $_GET['id_program'];
-         $data = mysqli_query($conn, "SELECT monitoring_tv.*, program_tv.nama_program, pasal.pasal
+         </div>
+         </div>
+         <?php
+            if (isset($_GET['id_program'])) {
+                $program = $_GET['id_program'];
+                $data = mysqli_query($conn, "SELECT monitoring_tv.*, program_tv.nama_program, pasal.pasal
                                 FROM monitoring_tv 
                                 JOIN program_tv ON monitoring_tv.tv = program_tv.id_program 
                                 JOIN pasal ON monitoring_tv.pasal = pasal.id 
                                 WHERE program_tv.id_program = '$program'");
-         if (mysqli_num_rows($data) > 0) { ?>
-     <table border="1" cellpadding="4" cellspacing="0" width="100%">
-         <thead>
-             <tr>
-                 <th class="text-center" width="10%">NO</th>
-                 <th class="text-center" width="45%">PROGRAM TV</th>
-                 <th class="text-center" width="65%">PELANGGARAN</th>
-                 <th class="text-center" width="75%">PASAL</th>
-             </tr>
-         </thead>
-         <?php
+                if (mysqli_num_rows($data) > 0) { ?>
+                 <table border="1" cellpadding="4" cellspacing="0" width="100%">
+                     <thead>
+                         <tr>
+                             <th class="text-center" width="10%">NO</th>
+                             <th class="text-center" width="45%">PROGRAM TV</th>
+                             <th class="text-center" width="65%">PELANGGARAN</th>
+                             <th class="text-center" width="75%">PASAL</th>
+                         </tr>
+                     </thead>
+                     <?php
                         $no = 1;
-           while ($d = mysqli_fetch_array($data)) {
-               ?>
-         <tbody>
-             <?
-             $no++;
-             ?>
-             <tr>
-                 <td class="text-center" width="10%"><?php echo $no++; ?></td>
-                 <td><?php echo $d['nama_program']; ?></td>
-                 <td><?php echo $d['keterangan']; ?></td>
-                 <td><?php echo $d['pasal']; ?></td>
-             </tr>
-             <?php
-           }
-         }
-     }?>
-         </tbody>
-     </table>
+                        while ($d = mysqli_fetch_array($data)) {
+                        ?>
+                         <tbody>
+                             <?
+                                $no++;
+                                ?>
+                             <tr>
+                                 <td class="text-center" width="10%"><?php echo $no++; ?></td>
+                                 <td><?php echo $d['nama_program']; ?></td>
+                                 <td><?php echo $d['keterangan']; ?></td>
+                                 <td><?php echo $d['pasal']; ?></td>
+                             </tr>
+                 <?php
+                        }
+                    }
+                } ?>
+                         </tbody>
+                 </table>
 
 
 
 
 
-     <br>
-     <br>
-     <br>
-     <br>
-
-     <table width="100%">
-         <tr>
-             <td width="250px">
-                 <p>
-                     <br><br>
-                     <br>
-                     <center>Mengetahui,</center>
-                 </p>
                  <br>
                  <br>
                  <br>
-                 <center>
-                     <p>AZHARI FADLI, S.PD.I<br>
-                 </center>
-             </td>
-             <td></td>
-             <td width="250px">
-                 <center>
-                     <p>Banjarbaru, <?php
-                                            $tanggal = date('d F Y');
-                                            $tanggal = str_replace(
-                                                ['January', 'February', 'March', 'April', 'May', 'June', 'Jule', 'August', 'September', 'October', 'November', 'December'],
-                                                ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agutus', 'September', 'Oktober', 'November', 'Desember'],
-                                                $tanggal
-                                            );
-                                            echo $tanggal; // contoh hasil: "03-Jan-21"
-                                            ?>
-                     </p>
-                 </center>
-                 <center><b>Komisi Penyiaran Indonesia</b></center>
-                 <center>
-                     <b>Kalimantan Selatan</b>
-                 </center>
-                 <center>Koordinator Bidang Pengawasan Isi Siaran</center>
-                 </p>
                  <br>
-                 <br>
-                 <center><br><br> ROZY MAULANA, SH</center><br>
-             </td>
-         </tr>
-     </table>
 
-     <script>
-     window.print();
-     $(document).ready(function() {
+                 <table width="100%">
+                     <tr>
+                         <td width="250px">
+                             <p>
+                                 <br><br>
+                                 <br>
+                                 <center>Mengetahui,</center>
+                             </p>
+                             <br>
+                             <br>
+                             <br>
+                             <center>
+                                 <p>AZHARI FADLI, S.PD.I<br>
+                             </center>
+                         </td>
+                         <td></td>
+                         <td width="250px">
+                             <center>
+                                 <p>Banjarbaru, <?php
+                                                $tanggal = date('d F Y');
+                                                $tanggal = str_replace(
+                                                    ['January', 'February', 'March', 'April', 'May', 'June', 'Jule', 'August', 'September', 'October', 'November', 'December'],
+                                                    ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agutus', 'September', 'Oktober', 'November', 'Desember'],
+                                                    $tanggal
+                                                );
+                                                echo $tanggal; // contoh hasil: "03-Jan-21"
+                                                ?>
+                                 </p>
+                             </center>
+                             <center><b>Komisi Penyiaran Indonesia</b></center>
+                             <center>
+                                 <b>Kalimantan Selatan</b>
+                             </center>
+                             <center>Koordinator Bidang Pengawasan Isi Siaran</center>
+                             </p>
+                             <br>
+                             <br>
+                             <center><br><br> ROZY MAULANA, SH</center><br>
+                         </td>
+                     </tr>
+                 </table>
 
-     });
-     </script>
+                 <script>
+                     window.print();
+                     $(document).ready(function() {
+
+                     });
+                 </script>
 
  </body>
 

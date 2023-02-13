@@ -20,4 +20,3 @@ if($delete){
     document.location.href = 'data_radio.php';
     </script> ";
 }
-?>

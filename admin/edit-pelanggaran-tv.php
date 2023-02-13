@@ -15,18 +15,18 @@ $query_pelanggaran = "select * from pelanggaran_tv where id_pelanggaran = '$id'"
 $result_pelanggaran = mysqli_query($conn, $query_pelanggaran);
 $row_pelanggaran = mysqli_fetch_assoc($result_pelanggaran);
 
-if(isset($_POST["submit"])){
+if (isset($_POST["submit"])) {
     $jenis_pelanggaran = htmlspecialchars($_POST["jenis_pelanggaran"]);
     $query = "UPDATE pelanggaran_tv SET jenis_pelanggaran = '$jenis_pelanggaran' where id_pelanggaran = '$id'";
     $edit = mysqli_query($conn, $query);
-    if($edit){
-    echo "<script type='text/javascript'>
+    if ($edit) {
+        echo "<script type='text/javascript'>
     alert('Data Berhasil Disimpan');
     document.location.href = 'data_pelanggaran_tv.php';
     </script>
-    "; 
-} else {
-    echo "<script type='text/javascript'>
+    ";
+    } else {
+        echo "<script type='text/javascript'>
     alert('Data gagal disimpan');
     document.location.href = 'edit-pelanggaran-tv.php?id='$id';
     </script>
@@ -42,9 +42,8 @@ if(isset($_POST["submit"])){
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Edit Pelanggaran TV | KPID Kalsel</title>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-        <link rel="shortcut icon" href="../dist/img/user.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="shortcut icon" href="../dist/img/user.png">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -90,14 +89,10 @@ if(isset($_POST["submit"])){
                                     <div class="card-body">
                                         <div class="form-grup">
                                             <label for="Jenis pelanggaran">Jenis pelanggaran : </label>
-                                            <input type="text" class="form-control" id="jenis_pelanggaran"
-                                                name="jenis_pelanggaran"
-                                                value="<?php echo $row_pelanggaran['jenis_pelanggaran']; ?>"
-                                                placeholder="Jenis pelanggaran..." required>
+                                            <input type="text" class="form-control" id="jenis_pelanggaran" name="jenis_pelanggaran" value="<?php echo $row_pelanggaran['jenis_pelanggaran']; ?>" placeholder="Jenis pelanggaran..." required>
                                         </div>
                                         <div class="footer">
-                                            <button class="btn btn-primary mr-1" type="submit"
-                                                name="submit">Simpan</button>
+                                            <button class="btn btn-primary mr-1" type="submit" name="submit">Simpan</button>
                                             <a href="data_pelanggaran_tv.php" class="btn btn-secondary mr-1">Batal</a>
                                         </div>
                                 </form>
@@ -130,24 +125,24 @@ if(isset($_POST["submit"])){
 
         <!-- Page specific script -->
         <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
+            $(function() {
+                $("#example1").DataTable({
+                    "responsive": true,
+                    "lengthChange": false,
+                    "autoWidth": false,
+                    "buttons": ["copy", "csv", "excel", "pdf", "print"]
+                }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+                $('#example2').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": false,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
+                });
             });
-        });
         </script>
     </div>
 </body>
-<?php include 'theme-footer.php';?>
+<?php include 'theme-footer.php'; ?>

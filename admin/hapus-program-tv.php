@@ -20,4 +20,3 @@ if($delete){
     document.location.href = 'program_tv.php';
     </script> ";
 }
-?>

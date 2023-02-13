@@ -12,7 +12,7 @@ if (!isset($_SESSION['login'])) {
 include '../koneksi.php';
 
 date_default_timezone_set('Asia/Singapore');
-if (isset($_POST["submit"])){
+if (isset($_POST["submit"])) {
 
     $tgl = htmlspecialchars($_POST["tgl"]);
     $jam = htmlspecialchars($_POST["jam"]);
@@ -25,19 +25,15 @@ if (isset($_POST["submit"])){
     $query = "INSERT INTO monitoring_tv VALUES ('','$tgl','$jam','$program','$time','$ket','$pasal','$tv')";
     $simpan = mysqli_query($conn, $query);
 
-    if($simpan){
-    echo "<script type='text/javascript'>
-    alert('Data Berhasil Disimpan');
-    document.location.href = 'monitoring_tv.php'
-    </script>
-    "; 
-} else {
-    echo "<script type='text/javascript'>
-    alert('Data gagal disimpan');
-    document.location.href = 'tambah-monitoring-tv.php'
-    </script>
-    ";
-}
+    if ($simpan) {
+        echo "
+        <script type='text/javascript'>alert('Data Berhasil Disimpan');
+        document.location.href = 'monitoring_tv.php'</script>";
+    } else {
+        echo "
+        <script type='text/javascript'>alert('Data gagal disimpan');
+        document.location.href = 'tambah-monitoring-tv.php'</script>";
+    }
 }
 
 ?>
@@ -48,9 +44,8 @@ if (isset($_POST["submit"])){
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tambah Monitoring stasiun TV | KPID Kalsel</title>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-        <link rel="shortcut icon" href="../dist/img/user.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="shortcut icon" href="../dist/img/user.png">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -95,47 +90,42 @@ if (isset($_POST["submit"])){
                                     <div class="card-body">
                                         <div class="form-grup">
                                             <label for="tgl">Tanggal : </label>
-                                            <input type="date" class="form-control" id="tgl" name="tgl"
-                                                placeholder="Pilih Tanggal" required>
+                                            <input type="date" class="form-control" id="tgl" name="tgl" placeholder="Pilih Tanggal" required>
                                         </div>
                                         <div class="form-grup">
                                             <label for="jam">Jam Tayang : </label>
-                                            <input type="text" class="form-control" id="jam" name="jam"
-                                                placeholder="Masukkan jam Tayang" required>
+                                            <input type="text" class="form-control" id="jam" name="jam" placeholder="Masukkan jam Tayang" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Stasiun TV :</label>
                                             <select name="tv" class="form-control" required="required" id="selectTV">
                                                 <option value="">- Pilih -</option>
                                                 <?php
-      $tv = mysqli_query($conn, "SELECT * FROM data_tv ORDER BY nama_stasiun ASC");
-      while ($k = mysqli_fetch_array($tv)) {
-      ?>
-                                                <option value="<?php echo $k['id_tv']; ?>">
-                                                    <?php echo $k['nama_stasiun']; ?></option>
+                                                $tv = mysqli_query($conn, "SELECT * FROM data_tv ORDER BY nama_stasiun ASC");
+                                                while ($k = mysqli_fetch_array($tv)) {
+                                                ?>
+                                                    <option value="<?php echo $k['id_tv']; ?>">
+                                                        <?php echo $k['nama_stasiun']; ?></option>
                                                 <?php
-      }
-      ?>
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label>Program :</label>
-                                            <select name="program" class="form-control" required="required"
-                                                id="selectProgram">
+                                            <select name="program" class="form-control" required="required" id="selectProgram">
                                                 <option value="">- Pilih -</option>
                                             </select>
                                         </div>
 
                                         <div class="form-grup">
                                             <label for="time">Time Code : </label>
-                                            <input type="text" class="form-control" id="time" name="time"
-                                                placeholder="Masukkan Time Code" required>
+                                            <input type="text" class="form-control" id="time" name="time" placeholder="Masukkan Time Code" required>
                                         </div>
 
                                         <div class="form-grup">
                                             <label for="ket">Keterangan : </label>
-                                            <input type="text" class="form-control" id="ket" name="ket"
-                                                placeholder="Masukkan Keterangan Pelanggaran" required>
+                                            <input type="text" class="form-control" id="ket" name="ket" placeholder="Masukkan Keterangan Pelanggaran" required>
                                         </div>
 
                                         <div class="form-group">
@@ -143,21 +133,20 @@ if (isset($_POST["submit"])){
                                             <select name="pasal" class="form-control" required="required">
                                                 <option value="">- Pilih -</option>
                                                 <?php
-                                                    $pasal = mysqli_query($conn, "SELECT * FROM pasal ORDER BY pasal ASC");
-                                                    while ($k = mysqli_fetch_array($pasal)) {
-                                                    ?>
-                                                <option value="<?php echo $k['id']; ?>">
-                                                    <?php echo $k['pasal']; ?></option>
+                                                $pasal = mysqli_query($conn, "SELECT * FROM pasal ORDER BY pasal ASC");
+                                                while ($k = mysqli_fetch_array($pasal)) {
+                                                ?>
+                                                    <option value="<?php echo $k['id']; ?>">
+                                                        <?php echo $k['pasal']; ?></option>
                                                 <?php
-                                                    }
-                                                    ?>
+                                                }
+                                                ?>
                                             </select>
                                         </div>
 
                                         <input type="hidden" id="id" name="id" value="<?php echo $_SESSION["id"]; ?>">
                                         <div class="footer">
-                                            <button class="btn btn-primary mr-1" type="submit"
-                                                name="submit">Simpan</button>
+                                            <button class="btn btn-primary mr-1" type="submit" name="submit">Simpan</button>
                                             <a href="monitoring_tv.php" class="btn btn-secondary mr-1">Batal</a>
                                         </div>
                                     </div>
@@ -199,31 +188,23 @@ if (isset($_POST["submit"])){
 
         <!-- Page specific script -->
 
-        <script>
-        document.querySelector('#selectTV').addEventListener('change', function() {
-            const idTV = this.value;
-            if (!idTV) {
-                return;
-            }
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET', `get-program.php?id_tv=${idTV}`);
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    const programs = JSON.parse(xhr.responseText);
-                    let options = '';
-                    programs.forEach(function(program) {
-                        options +=
-                            `<option value="${program.id_program}">${program.nama_program}</option>`;
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#selectTV").change(function() {
+                    var id_tv = $(this).val();
+                    $.ajax({
+                        url: "get_program.php",
+                        method: "POST",
+                        data: {
+                            id_tv: id_tv
+                        },
+                        success: function(data) {
+                            $("#selectProgram").html(data);
+                        }
                     });
-                    document.querySelector('#selectProgram').innerHTML = options;
-                } else {
-                    console.error(xhr.responseText);
-                }
-            };
-            xhr.send();
-        });
+                });
+            });
         </script>
-
     </div>
 </body>
-<?php include 'theme-footer.php';?>
+<?php include 'theme-footer.php'; ?>

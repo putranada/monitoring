@@ -8,16 +8,15 @@ if (!isset($_SESSION['login'])) {
     header("Location: ../index.php");
     exit;
 }
-    include '../koneksi.php';
+include '../koneksi.php';
 ?>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Stasiun radio | KPID Kalsel</title>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-        <link rel="shortcut icon" href="../dist/img/user.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="shortcut icon" href="../dist/img/user.png">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -27,8 +26,8 @@ if (!isset($_SESSION['login'])) {
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-        <?php include 'theme-header.php';?>
-        <?php include 'theme-sidebar.php';?>
+        <?php include 'theme-header.php'; ?>
+        <?php include 'theme-sidebar.php'; ?>
 
         <div class="content-wrapper">
             <section class="content-header">
@@ -58,19 +57,18 @@ if (!isset($_SESSION['login'])) {
                                                 <label>Pilih Stasiun Radio</label>
                                                 <select name="id_radio" class="form-control" required="required">
                                                     <option value="">- Semua Stasiun radio -</option>
-                                                    <?php 
-          $radio = mysqli_query($conn, "SELECT * FROM data_radio");
-          while ($k = mysqli_fetch_array($radio)) {
-        ?>
-                                                    <option value="<?php echo $k['id_radio']; ?>">
-                                                        <?php echo $k['nama_stasiun']; ?>
-                                                    </option>
-                                                    <?php 
-          }
-        ?>
+                                                    <?php
+                                                    $radio = mysqli_query($conn, "SELECT * FROM data_radio");
+                                                    while ($k = mysqli_fetch_array($radio)) {
+                                                    ?>
+                                                        <option value="<?php echo $k['id_radio']; ?>">
+                                                            <?php echo $k['nama_stasiun']; ?>
+                                                        </option>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </select>
-                                                <input type="submit" value="TAMPILKAN"
-                                                    class="btn btn-md btn-primary mr-20">
+                                                <input type="submit" value="TAMPILKAN" class="btn btn-md btn-primary mr-20">
                                             </div>
                                         </div>
                                     </form>
@@ -78,14 +76,13 @@ if (!isset($_SESSION['login'])) {
                                     <?php
                                     if (isset($_GET['id_radio'])) {
                                         $selected_id = $_GET['id_radio'];
-                                        ?>
-                                    <a href="laporan-radio-print.php?id_radio=<?php echo $selected_id ?>"
-                                        target="_blank" class="btn btn-sm btn-primary"><i class="fa fa-print"></i>
-                                        &nbsp
-                                        PRINT</a> <?php
-                                    }
-                                                    
-                                            ?>
+                                    ?>
+                                        <a href="laporan-radio-print.php?id_radio=<?php echo $selected_id ?>" target="_blank" class="btn btn-sm btn-primary"><i class="fa fa-print"></i>
+                                            &nbsp
+                                            PRINT</a> <?php
+                                                    }
+
+                                                        ?>
                                     </form>
                                     <div class="card-body">
 
@@ -96,37 +93,37 @@ if (!isset($_SESSION['login'])) {
                                 JOIN data_radio ON program_radio.radio = data_radio.id_radio
                                 WHERE data_radio.id_radio = '$radio'");
                                             if (mysqli_num_rows($data) > 0) { ?>
-                                        <table id="example" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center" width="10%">NO</th>
-                                                    <th class="text-center" width="75%">PROGRAM RADIO</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php $no = 1;
-                                                while ($d = mysqli_fetch_array($data)) {
-                                                    ?>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="text-center" width="10%"><?php echo $no; ?></td>
-                                                    <td><?php echo $d['nama_program']; ?></td>
-                                                </tr>
-                                                <?php $no++;
-                                                } ?>
-                                            </tbody>
-                                        </table>
-                                        <?php
+                                                <table id="example" class="table table-bordered table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="text-center" width="10%">NO</th>
+                                                            <th class="text-center" width="75%">PROGRAM RADIO</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php $no = 1;
+                                                        while ($d = mysqli_fetch_array($data)) {
+                                                        ?>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-center" width="10%"><?php echo $no; ?></td>
+                                                            <td><?php echo $d['nama_program']; ?></td>
+                                                        </tr>
+                                                    <?php $no++;
+                                                        } ?>
+                                                    </tbody>
+                                                </table>
+                                            <?php
                                             } else {
-                                                ?>
-                                        <div class="alert alert-info text-center">
-                                            Silahkan Filter Laporan Terlebih Dulu.
-                                        </div>
+                                            ?>
+                                                <div class="alert alert-info text-center">
+                                                    Silahkan Filter Laporan Terlebih Dulu.
+                                                </div>
 
                                         <?php
                                             }
                                         }
-                        ?>
+                                        ?>
 
                                     </div>
                                 </div>
@@ -162,24 +159,24 @@ if (!isset($_SESSION['login'])) {
 
     <!-- Page specific script -->
     <script>
-    $(function() {
-        $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
         });
-    });
     </script>
     </div>
 </body>
-<?php include 'theme-footer.php';?>
+<?php include 'theme-footer.php'; ?>

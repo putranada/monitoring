@@ -12,32 +12,32 @@ if (!isset($_SESSION['login'])) {
 include '../koneksi.php';
 
 date_default_timezone_set('Asia/Singapore');
-if (isset($_POST["submit"])){
+if (isset($_POST["submit"])) {
 
     $tgl = htmlspecialchars($_POST["tgl"]);
     $jam = htmlspecialchars($_POST["jam"]);
-    $program = htmlspecialchars($_POST["id_program"]);
+    $program = htmlspecialchars($_POST["program"]);
     $time = htmlspecialchars($_POST["time"]);
     $ket = htmlspecialchars($_POST["ket"]);
     $pasal = htmlspecialchars($_POST["pasal"]);
-     $radio = htmlspecialchars($_POST["radio"]);
+    $radio = htmlspecialchars($_POST["radio"]);
     // echo "INSERT INTO monitoring_radio VALUES ('','$tgl','$jam','$program','$time','$ket','$pasal'.'$radio')";
     $query = "INSERT INTO monitoring_radio VALUES ('','$tgl','$jam','$program','$time','$ket','$pasal','$radio')";
     $simpan = mysqli_query($conn, $query);
 
-    if($simpan){
-    echo "<script type='text/javascript'>
+    if ($simpan) {
+        echo "<script type='text/javascript'>
     alert('Data Berhasil Disimpan');
     document.location.href = 'monitoring_radio.php'
     </script>
-    "; 
-} else {
-    echo "<script type='text/javascript'>
+    ";
+    } else {
+        echo "<script type='text/javascript'>
     alert('Data gagal disimpan');
     document.location.href = 'tambah-monitoring-radio.php'
     </script>
     ";
-}
+    }
 }
 
 ?>
@@ -48,9 +48,8 @@ if (isset($_POST["submit"])){
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tambah Monitoring Radio | KPID Kalsel</title>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-        <link rel="shortcut icon" href="../dist/img/user.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="shortcut icon" href="../dist/img/user.png">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -95,53 +94,41 @@ if (isset($_POST["submit"])){
                                     <div class="card-body">
                                         <div class="form-grup">
                                             <label for="tgl">Tanggal : </label>
-                                            <input type="date" class="form-control" id="tgl" name="tgl"
-                                                placeholder="Pilih Tanggal" required>
+                                            <input type="date" class="form-control" id="tgl" name="tgl" placeholder="Pilih Tanggal" required>
                                         </div>
                                         <div class="form-grup">
                                             <label for="jam">Jam Tayang : </label>
-                                            <input type="text" class="form-control" id="jam" name="jam"
-                                                placeholder="Masukkan jam Tayang" required>
+                                            <input type="text" class="form-control" id="jam" name="jam" placeholder="Masukkan jam Tayang" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Radio :</label>
-                                            <select name="radio" class="form-control" required="required">
+                                            <select name="radio" class="form-control" required="required" id="selectRadio">
+                                                <option value="">- Pilih -</option>
                                                 <?php
-                                                    $pro = mysqli_query($conn, "SELECT * FROM data_radio ORDER BY nama_stasiun ASC");
-                                                    while ($k = mysqli_fetch_array($pro)) {
-                                                    ?>
-                                                <option value="<?php echo $k['id_radio']; ?>">
-                                                    <?php echo $k['nama_stasiun']; ?></option>
+                                                $pro = mysqli_query($conn, "SELECT * FROM data_radio ORDER BY nama_stasiun ASC");
+                                                while ($k = mysqli_fetch_array($pro)) {
+                                                ?>
+                                                    <option value="<?php echo $k['id_radio']; ?>">
+                                                        <?php echo $k['nama_stasiun']; ?></option>
                                                 <?php
-                                                    }
-                                                    ?>
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label>Program :</label>
-                                            <select name="id_program" class="form-control" required="required">
+                                            <select name="program" class="form-control" required="required" id="selectProgram">
                                                 <option value="">- Pilih -</option>
-                                                <?php
-                                                    $program = mysqli_query($conn, "SELECT * FROM program_radio ORDER BY nama_program ASC");
-                                                    while ($k = mysqli_fetch_array($program)) {
-                                                    ?>
-                                                <option value="<?php echo $k['id_program']; ?>">
-                                                    <?php echo $k['nama_program']; ?></option>
-                                                <?php
-                                                    }
-                                                    ?>
                                             </select>
                                         </div>
                                         <div class="form-grup">
                                             <label for="time">Time Code : </label>
-                                            <input type="text" class="form-control" id="time" name="time"
-                                                placeholder="Masukkan Time Code" required>
+                                            <input type="text" class="form-control" id="time" name="time" placeholder="Masukkan Time Code" required>
                                         </div>
 
                                         <div class="form-grup">
                                             <label for="ket">Keterangan : </label>
-                                            <input type="text" class="form-control" id="ket" name="ket"
-                                                placeholder="Masukkan Keterangan Pelanggaran" required>
+                                            <input type="text" class="form-control" id="ket" name="ket" placeholder="Masukkan Keterangan Pelanggaran" required>
                                         </div>
 
                                         <div class="form-group">
@@ -149,20 +136,19 @@ if (isset($_POST["submit"])){
                                             <select name="pasal" class="form-control" required="required">
                                                 <option value="">- Pilih -</option>
                                                 <?php
-                                                    $pasal = mysqli_query($conn, "SELECT * FROM pasal ORDER BY pasal ASC");
-                                                    while ($k = mysqli_fetch_array($pasal)) {
-                                                    ?>
-                                                <option value="<?php echo $k['id']; ?>">
-                                                    <?php echo $k['pasal']; ?></option>
+                                                $pasal = mysqli_query($conn, "SELECT * FROM pasal ORDER BY pasal ASC");
+                                                while ($k = mysqli_fetch_array($pasal)) {
+                                                ?>
+                                                    <option value="<?php echo $k['id']; ?>">
+                                                        <?php echo $k['pasal']; ?></option>
                                                 <?php
-                                                    }
-                                                    ?>
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                         <input type="hidden" id="id" name="id" value="<?php echo $_SESSION["id"]; ?>">
                                         <div class="footer">
-                                            <button class="btn btn-primary mr-1" type="submit"
-                                                name="submit">Simpan</button>
+                                            <button class="btn btn-primary mr-1" type="submit" name="submit">Simpan</button>
                                             <a href="monitoring_radio.php" class="btn btn-secondary mr-1">Batal</a>
                                         </div>
                                     </div>
@@ -204,25 +190,43 @@ if (isset($_POST["submit"])){
 
         <!-- Page specific script -->
         <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print"]
-            }).buttons().container().appendTo(
-                '#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
+            $(function() {
+                $("#example1").DataTable({
+                    "responsive": true,
+                    "lengthChange": false,
+                    "autoWidth": false,
+                    "buttons": ["copy", "csv", "excel", "pdf", "print"]
+                }).buttons().container().appendTo(
+                    '#example1_wrapper .col-md-6:eq(0)');
+                $('#example2').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": false,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
+                });
             });
-        });
+        </script>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#selectRadio").change(function() {
+                    var id_radio = $(this).val();
+                    $.ajax({
+                        url: "get_programradio.php",
+                        method: "POST",
+                        data: {
+                            id_radio: id_radio
+                        },
+                        success: function(data) {
+                            $("#selectProgram").html(data);
+                        }
+                    });
+                });
+            });
         </script>
     </div>
 </body>
-<?php include 'theme-footer.php';?>
+<?php include 'theme-footer.php'; ?>

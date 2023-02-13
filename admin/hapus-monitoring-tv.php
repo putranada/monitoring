@@ -20,4 +20,3 @@ if($delete){
     document.location.href = 'monitoring_tv.php';
     </script> ";
 }
-?>

@@ -8,16 +8,15 @@ if (!isset($_SESSION['login'])) {
     header("Location: ../index.php");
     exit;
 }
-    include '../koneksi.php';
+include '../koneksi.php';
 ?>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Stasiun TV | KPID Kalsel</title>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-        <link rel="shortcut icon" href="../dist/img/user.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="shortcut icon" href="../dist/img/user.png">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -27,8 +26,8 @@ if (!isset($_SESSION['login'])) {
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-        <?php include 'theme-header.php';?>
-        <?php include 'theme-sidebar.php';?>
+        <?php include 'theme-header.php'; ?>
+        <?php include 'theme-sidebar.php'; ?>
 
         <div class="content-wrapper">
             <section class="content-header">
@@ -59,35 +58,33 @@ if (!isset($_SESSION['login'])) {
                                                 <label>Pilih Stasiun TV</label>
                                                 <select name="id_tv" class="form-control" required="required">
                                                     <option value="">- Semua Stasiun TV -</option>
-                                                    <?php 
-                                            $tv = mysqli_query($conn, "SELECT * FROM data_tv");
-                                            while ($k = mysqli_fetch_array($tv)) {
-                                            ?>
-                                                    <option <?php if (isset($_GET['id_tv'])) {
-                                                            if ($_GET['id_tv'] == $k['id_tv']) {
-                                                                echo "selected='selected'";
-                                                            }
-                                                        } ?> value="<?php echo $k['id_tv']; ?>">
-                                                        <?php echo $k['nama_stasiun']; ?>
-                                                    </option>
+                                                    <?php
+                                                    $tv = mysqli_query($conn, "SELECT * FROM data_tv");
+                                                    while ($k = mysqli_fetch_array($tv)) {
+                                                    ?>
+                                                        <option <?php if (isset($_GET['id_tv'])) {
+                                                                    if ($_GET['id_tv'] == $k['id_tv']) {
+                                                                        echo "selected='selected'";
+                                                                    }
+                                                                } ?> value="<?php echo $k['id_tv']; ?>">
+                                                            <?php echo $k['nama_stasiun']; ?>
+                                                        </option>
                                             </div> <?php
- }
-                                            ?>
-                                            </select> <input type="submit" value="TAMPILKAN"
-                                                class="btn btn-md btn-primary mr-20">
+                                                    }
+                                                    ?>
+                                        </select> <input type="submit" value="TAMPILKAN" class="btn btn-md btn-primary mr-20">
                                         </div>
                                     </form>
                                 </div>
 
                                 <?php
-                                    if (isset($_GET['id_tv'])) {
-                                        $selected_id = $_GET['id_tv'];
-                                        ?>
-                                <a href="laporan-tv-print.php?id_tv=<?php echo $selected_id ?>" target="_blank"
-                                    class="btn btn-sm btn-primary"><i class="fa fa-print"></i> &nbsp
-                                    PRINT</a><?php
- }
-                                            ?>
+                                if (isset($_GET['id_tv'])) {
+                                    $selected_id = $_GET['id_tv'];
+                                ?>
+                                    <a href="laporan-tv-print.php?id_tv=<?php echo $selected_id ?>" target="_blank" class="btn btn-sm btn-primary"><i class="fa fa-print"></i> &nbsp
+                                        PRINT</a><?php
+                                                }
+                                                    ?>
                                 <div class="card-body">
                                     <?php if (isset($_GET['id_tv'])) {
                                         $tv = $_GET['id_tv'];
@@ -96,37 +93,37 @@ if (!isset($_SESSION['login'])) {
                                 JOIN data_tv ON program_tv.tv = data_tv.id_tv
                                 WHERE data_tv.id_tv = '$tv'");
                                         if (mysqli_num_rows($data) > 0) { ?>
-                                    <table id="example" class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center" width="10%">NO</th>
-                                                <th class="text-center" width="75%">PROGRAM TV</th>
-                                            </tr>
-                                        <tbody>
-                                            </thead>
-                                            <?php
-                                        $no = 1;
-                                        while ($d = mysqli_fetch_array($data)) {
-                                            ?>
-                                            <tr>
-                                                <td class="text-center" width="10%"><?php echo $no; ?></td>
-                                                <td><?php echo $d['nama_program']; ?></td>
-                                            </tr>
-                                            <?php $no++;
-                                        } ?>
-                                        </tbody>
-                                    </table>
-                                    <?php
+                                            <table id="example" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center" width="10%">NO</th>
+                                                        <th class="text-center" width="75%">PROGRAM TV</th>
+                                                    </tr>
+                                                <tbody>
+                                                    </thead>
+                                                    <?php
+                                                    $no = 1;
+                                                    while ($d = mysqli_fetch_array($data)) {
+                                                    ?>
+                                                        <tr>
+                                                            <td class="text-center" width="10%"><?php echo $no; ?></td>
+                                                            <td><?php echo $d['nama_program']; ?></td>
+                                                        </tr>
+                                                    <?php $no++;
+                                                    } ?>
+                                                </tbody>
+                                            </table>
+                                        <?php
                                         } else {
-                                            ?>
-                                    <div class="alert alert-info text-center">
-                                        Silahkan Filter Laporan Terlebih Dulu.
-                                    </div>
+                                        ?>
+                                            <div class="alert alert-info text-center">
+                                                Silahkan Filter Laporan Terlebih Dulu.
+                                            </div>
 
                                     <?php
                                         }
                                     }
-                        ?>
+                                    ?>
 
                                 </div>
                             </div>
@@ -162,24 +159,24 @@ if (!isset($_SESSION['login'])) {
 
     <!-- Page specific script -->
     <script>
-    $(function() {
-        $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
         });
-    });
     </script>
     </div>
 </body>
-<?php include 'theme-footer.php';?>
+<?php include 'theme-footer.php'; ?>
