@@ -16,7 +16,7 @@ if (isset($_POST["submit"])) {
 
     $tgl = htmlspecialchars($_POST["tgl"]);
     $jam = htmlspecialchars($_POST["jam"]);
-    $program = htmlspecialchars($_POST["id_program"]);
+    $program = htmlspecialchars($_POST["program"]);
     $time = htmlspecialchars($_POST["time"]);
     $ket = htmlspecialchars($_POST["ket"]);
     $pasal = htmlspecialchars($_POST["pasal"]);
@@ -102,7 +102,8 @@ if (isset($_POST["submit"])) {
                                         </div>
                                         <div class="form-group">
                                             <label>Radio :</label>
-                                            <select name="radio" class="form-control" required="required">
+                                            <select name="radio" class="form-control" required="required" id="selectRadio">
+                                                <option value="">- Pilih -</option>
                                                 <?php
                                                 $pro = mysqli_query($conn, "SELECT * FROM data_radio ORDER BY nama_stasiun ASC");
                                                 while ($k = mysqli_fetch_array($pro)) {
@@ -116,17 +117,8 @@ if (isset($_POST["submit"])) {
                                         </div>
                                         <div class="form-group">
                                             <label>Program :</label>
-                                            <select name="id_program" class="form-control" required="required">
+                                            <select name="program" class="form-control" required="required" id="selectProgram">
                                                 <option value="">- Pilih -</option>
-                                                <?php
-                                                $program = mysqli_query($conn, "SELECT * FROM program_radio ORDER BY nama_program ASC");
-                                                while ($k = mysqli_fetch_array($program)) {
-                                                ?>
-                                                    <option value="<?php echo $k['id_program']; ?>">
-                                                        <?php echo $k['nama_program']; ?></option>
-                                                <?php
-                                                }
-                                                ?>
                                             </select>
                                         </div>
                                         <div class="form-grup">
@@ -214,6 +206,24 @@ if (isset($_POST["submit"])) {
                     "info": true,
                     "autoWidth": false,
                     "responsive": true,
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#selectRadio").change(function() {
+                    var id_radio = $(this).val();
+                    $.ajax({
+                        url: "get_programradio.php",
+                        method: "POST",
+                        data: {
+                            id_radio: id_radio
+                        },
+                        success: function(data) {
+                            $("#selectProgram").html(data);
+                        }
+                    });
                 });
             });
         </script>

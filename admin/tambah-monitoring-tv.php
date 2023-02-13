@@ -188,31 +188,23 @@ if (isset($_POST["submit"])) {
 
         <!-- Page specific script -->
 
-        <script>
-            document.querySelector('#selectTV').addEventListener('change', function() {
-                const idTV = this.value;
-                if (!idTV) {
-                    return;
-                }
-                const xhr = new XMLHttpRequest();
-                xhr.open('GET', `get-program.php?id_tv=${idTV}`);
-                xhr.onload = function() {
-                    if (xhr.status === 200) {
-                        const programs = JSON.parse(xhr.responseText);
-                        let options = '';
-                        programs.forEach(function(program) {
-                            options +=
-                                `<option value="${program.id_program}">${program.nama_program}</option>`;
-                        });
-                        document.querySelector('#selectProgram').innerHTML = options;
-                    } else {
-                        console.error(xhr.responseText);
-                    }
-                };
-                xhr.send();
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#selectTV").change(function() {
+                    var id_tv = $(this).val();
+                    $.ajax({
+                        url: "get_program.php",
+                        method: "POST",
+                        data: {
+                            id_tv: id_tv
+                        },
+                        success: function(data) {
+                            $("#selectProgram").html(data);
+                        }
+                    });
+                });
             });
         </script>
-
     </div>
 </body>
 <?php include 'theme-footer.php'; ?>

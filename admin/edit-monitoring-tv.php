@@ -107,28 +107,26 @@ if (isset($_POST["submit"])) {
                                         </div>
                                         <div class="form-group">
                                             <label>TV :</label>
-                                            <select name="tv" class="form-control" required="required">
+                                            <select name="tv" class="form-control" required="required" id="selectTV">
+                                                <option value="">- Pilih -</option>
                                                 <?php
                                                 $pro = mysqli_query($conn, "SELECT * FROM data_tv ORDER BY nama_stasiun ASC");
                                                 while ($k = mysqli_fetch_array($pro)) {
-                                                ?>
-                                                    <option value="<?php echo $k['id_tv']; ?>">
-                                                        <?php echo $k['nama_stasiun']; ?></option>
-                                                <?php
+                                                    $selected = ($k['id_tv'] == $row_monitoring['tv']) ? "selected" : "";
+                                                    echo "<option value='" . $k['id_tv'] . "' " . $selected . ">" . $k['nama_stasiun'] . "</option>";
                                                 }
                                                 ?>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>PROGRAM :</label>
-                                            <select name="program" class="form-control" required="required">
+                                            <label>Program :</label>
+                                            <select name="program" class="form-control" required="required" id="selectProgram">
+                                                <option value="">- Pilih -</option>
                                                 <?php
-                                                $pro = mysqli_query($conn, "SELECT * FROM program_tv ORDER BY nama_program ASC");
+                                                $pro = mysqli_query($conn, "SELECT * FROM program_tv");
                                                 while ($k = mysqli_fetch_array($pro)) {
-                                                ?>
-                                                    <option value="<?php echo $k['id_program']; ?>">
-                                                        <?php echo $k['nama_program']; ?></option>
-                                                <?php
+                                                    $selected = ($k['id_program'] == $row_monitoring['program']) ? "selected" : "";
+                                                    echo "<option value='" . $k['id_program'] . "' " . $selected . ">" . $k['nama_program'] . "</option>";
                                                 }
                                                 ?>
                                             </select>
@@ -204,6 +202,24 @@ if (isset($_POST["submit"])) {
                     "info": true,
                     "autoWidth": false,
                     "responsive": true,
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#selectTV").change(function() {
+                    var id_tv = $(this).val();
+                    $.ajax({
+                        url: "get_program.php",
+                        method: "POST",
+                        data: {
+                            id_tv: id_tv
+                        },
+                        success: function(data) {
+                            $("#selectProgram").html(data);
+                        }
+                    });
                 });
             });
         </script>

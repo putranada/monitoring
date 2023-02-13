@@ -2,10 +2,10 @@
 include '../koneksi.php';
 
 // Mengambil ID TV yang dipilih
-$id_tv = $_POST['id_tv'];
+$id_radio = $_POST['id_radio'];
 
 // Query untuk mengambil program-program yang ditayangkan oleh TV tersebut
-$query = "SELECT * FROM program_tv WHERE tv = '$id_tv'";
+$query = "SELECT * FROM program_radio WHERE radio = '$id_radio'";
 
 $program = mysqli_query($conn, $query);
 
