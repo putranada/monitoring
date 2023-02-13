@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 18, 2023 at 10:36 AM
--- Server version: 10.1.29-MariaDB
--- PHP Version: 7.1.12
+-- Generation Time: Feb 13, 2023 at 06:36 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -25,512 +24,533 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `bab`
+--
+
+CREATE TABLE `bab` (
+  `id_bab` int(11) NOT NULL,
+  `bab` varchar(244) NOT NULL,
+  `judul` varchar(244) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `bab`
+--
+
+INSERT INTO `bab` (`id_bab`, `bab`, `judul`) VALUES
+(1, 'BAB 1', 'KETENTUAN UMUM'),
+(2, 'BAB 2', 'DASAR DAN TUJUAN'),
+(4, 'BAB III', 'RUANG LINGKUP'),
+(5, 'BAB IV', 'PENGHORMATAN TERHADAP NILAI-NILAI KESUKUAN, AGAMA, RAS, DAN ANTARGOLONGAN'),
+(6, 'BAB V', 'PENGHORMATAN TERHADAP NORMA KESOPANAN DAN KESUSILAAN'),
+(9, 'BAB VI', 'PENGHORMATAN TERHADAP ETIKA PROFESI'),
+(10, 'BAB VII', 'PERLINDUNGAN KEPENTINGAN PUBLIK'),
+(11, 'BAB VIII', 'PROGRAM LAYANAN PUBLIK'),
+(12, 'BAB IX', 'PENGHORMATAN TERHADAP HAK PRIVASI'),
+(13, 'BAB X', 'PERLINDUNGAN KEPADA ANAK'),
+(14, '-', '-');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `data_radio`
+--
+
+CREATE TABLE `data_radio` (
+  `id_radio` int(11) NOT NULL,
+  `nama_stasiun` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `data_radio`
+--
+
+INSERT INTO `data_radio` (`id_radio`, `nama_stasiun`) VALUES
+(1, 'PT. Radio Darul Musthofa (MASA FM).'),
+(2, 'PT. Radio Suara Mandiri (J Radio)'),
+(3, 'JHONLIN RADIO'),
+(4, 'Al Khair FM'),
+(5, 'Suara Al Jihad FM'),
+(6, 'Kumala FM'),
+(7, 'Radio Martapura'),
+(8, 'Radio Gema Amandit'),
+(9, 'STAR FM'),
+(10, 'DIRGAHAYU (PM5BAE)'),
+(11, 'SWARA TARUNA JAYA (PM5FCO)'),
+(12, 'SWARA RUHUI RAHAYU (PM5FBN)');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `data_tv`
+--
+
+CREATE TABLE `data_tv` (
+  `id_tv` int(11) NOT NULL,
+  `nama_stasiun` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `data_tv`
+--
+
+INSERT INTO `data_tv` (`id_tv`, `nama_stasiun`) VALUES
+(1, 'TVRI KALSEL'),
+(2, 'KOMPAS TV'),
+(3, 'DUTA TV'),
+(4, 'RCTI');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `monitoring_radio`
+--
+
+CREATE TABLE `monitoring_radio` (
+  `id` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
+  `jam_tayang` varchar(244) NOT NULL,
+  `program` int(11) NOT NULL,
+  `time_code` varchar(244) NOT NULL,
+  `keterangan` text NOT NULL,
+  `pasal` int(11) NOT NULL,
+  `radio` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `monitoring_radio`
+--
+
+INSERT INTO `monitoring_radio` (`id`, `tanggal`, `jam_tayang`, `program`, `time_code`, `keterangan`, `pasal`, `radio`) VALUES
+(2, '2023-02-05', '10.02 - 11.00', 1, '10.02 - 11.00', 'Tidak Menampilkan Klasifikasi program Acara', 1, 1),
+(3, '2023-02-06', '10.02 - 11.00', 1, '10.02 - 11.00', 'Tidak Menampilkan Klasifikasi program Acara', 7, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `monitoring_tv`
+--
+
+CREATE TABLE `monitoring_tv` (
+  `id` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
+  `jam_tayang` varchar(244) NOT NULL,
+  `program` int(11) DEFAULT NULL,
+  `time_code` varchar(244) NOT NULL,
+  `keterangan` text NOT NULL,
+  `pasal` int(11) NOT NULL,
+  `tv` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `monitoring_tv`
+--
+
+INSERT INTO `monitoring_tv` (`id`, `tanggal`, `jam_tayang`, `program`, `time_code`, `keterangan`, `pasal`, `tv`) VALUES
+(1, '2023-02-04', '10.02 - 11.30', 2, '10.02 - 11.30', 'Tidak menampilkan klasifikasi program acara', 7, 2),
+(3, '2023-02-05', '10.02 - 11.00', 2, '10.02 - 11.00', 'Tidak Menampilkan Klasifikasi program Acara', 1, 2),
+(8, '2023-02-04', '10.02 - 11.00', 2, '10.02 - 11.00', 'Tidak Menampilkan Klasifikasi program Acara', 7, 1),
+(15, '2023-02-05', '10.02 - 11.00', 2, '10.02 - 11.00', 'Tidak Menampilkan Klasifikasi program Acara', 7, 3);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pasal`
 --
 
 CREATE TABLE `pasal` (
-  `id_pasal` int(100) NOT NULL,
-  `pasal` varchar(50) NOT NULL,
-  `ayat_point` varchar(3000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id` int(11) NOT NULL,
+  `id_bab` int(11) DEFAULT NULL,
+  `pasal` varchar(244) NOT NULL,
+  `isi` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `pasal`
 --
 
-INSERT INTO `pasal` (`id_pasal`, `pasal`, `ayat_point`) VALUES
-(1, 'SPS Pasal 6', '(1) Program siaran wajib menghormati perbedaan suku, agama, ras, dan antargolongan yang mencakup keberagaman budaya, usia, gender, dan/ atau kehidupan sosial ekonomi.'),
-(2, 'SPS Pasal 6', '(2) Program siaran dilarang merendahkan dan/atau melecehkan:\r\na. suku, agama, ras, dan/atau antargolongan; dan/atau\r\nb. individu atau kelompok karena perbedaan suku, agama, ras, antargolongan, usia, budaya, dan/atau kehidupan sosial ekonomi.'),
-(3, 'SPS Pasal 7', 'Materi agama pada program siaran wajib memenuhi ketentuan sebagai berikut:\r\na. tidak berisi serangan, penghinaan dan/atau pelecehan terhadap pandangan dan keyakinan antar atau dalam agama tertentu serta menghargai etika hubungan antarumat beragama;\r\nb. menyajikan muatan yang berisi perbedaan pandangan/paham dalam agama tertentu secara berhati-hati, berimbang, tidak berpihak, dengan narasumber yang berkompeten, dan dapat dipertanggungjawabkan.\r\nc. tidak menyajikan perbandingan antaragama; dan\r\nd. tidak menyajikan alasan perpindahan agama seseorang atau sekelompok\r\norang.'),
-(4, 'SPS Pasal 8', 'Program siaran tentang keunikan suatu budaya dan/atau kehidupan sosial masyarakat tertentu dengan muatan yang dapat menimbulkan ketidaknyamanan khalayak wajib disiarkan dengan gambar longshot atau disamarkan dan/atau tidak dinarasikan secara  detail.'),
-(5, 'SPS Pasal 9', '(1) Program siaran wajib memperhatikan norma kesopanan dan kesusilaan yang dijunjung oleh keberagaman khalayak baik terkait agama, suku, budaya, usia, dan/atau latar belakang ekonomi.'),
-(6, 'SPS Pasal 9', '(2) Program siaran wajib berhati-hati agar tidak merugikan dan menimbulkan dampak negatif terhadap keberagaman norma kesopanan dan kesusilaan yang dianut oleh masyarakat.'),
-(7, 'SPS Pasal 10', '(1) Program siaran wajib menghormati etika profesi yang dimiliki oleh profesi tertentu yang ditampilkan dalam isi siaran agar tidak merugikan dan menimbulkan dampak negatif di masyarakat.'),
-(8, 'SPS Pasal 10', '(2) Etika profesi sebagaimana yang dimaksud pada ayat (1) adalah etika\r\nprofesi yang diakui dalam peraturan perundang-undangan.'),
-(9, 'SPS Pasal 11', '(1) Program siaran wajib dimanfaatkan untuk kepentingan publik dan tidak untuk kepentingan kelompok tertentu.'),
-(10, 'SPS Pasal 11', '(2) Program siaran dilarang dimanfaatkan untuk kepentingan pribadi pemilik lembaga penyiaran bersangkutan dan/atau kelompoknya.'),
-(11, 'SPS Pasal 11', '(3) Program siaran yang berisi tentang kesehatan masyarakat dilarang menampilkan penyedia jasa pelayanan kesehatan masyarakat yang tidak memiliki izin dari lembaga yang berwenang.'),
-(12, '', '');
+INSERT INTO `pasal` (`id`, `id_bab`, `pasal`, `isi`) VALUES
+(1, 1, 'Pasal 1 (1)', 'Pedoman Perilaku Penyiaran'),
+(7, 2, 'Pasal 2', 'Standar Program Siaran'),
+(9, 4, 'Pasal 5 (a)', 'nilai-nilai kesukuan, keagamaan, ras, dan antargolongan'),
+(10, 5, 'Pasal 6 (1)', 'Program siaran wajib menghormati perbedaan suku, agama, ras, dan antargolongan yang mencakup keberagaman budaya, usia, gender, dan/atau kehidupan sosial ekonomi'),
+(11, 6, 'Pasal 9 (1)', 'Program siaran wajib memperhatikan norma kesopanan dan kesusilaan'),
+(12, 6, 'SPS Pasal 9 (2)', 'Program siaran wajib berhati-hati agar tidak merugikan dan menimbulkan  dampak negatif terhadap keberagaman norma kesopanan dan kesusilaan  yang dianut oleh masyarakat.'),
+(13, 9, 'SPS Pasal 10 (1)', 'Program siaran wajib menghormati etika profesi yang dimiliki oleh  profesi tertentu yang ditampilkan dalam isi siaran agar tidak merugikan  dan menimbulkan dampak negatif di masyarakat.'),
+(14, 9, 'SPS Pasal 10 (2)', 'Etika profesi sebagaimana yang dimaksud pada ayat (1) adalah etika  profesi yang diakui dalam peraturan perundang-undangan.'),
+(15, 10, 'SPS Pasal 11 (1)', 'Program siaran wajib dimanfaatkan untuk kepentingan publik dan tidak  untuk kepentingan kelompok tertentu'),
+(16, 10, 'SPS Pasal 11 (2)', 'Program siaran dilarang dimanfaatkan untuk kepentingan pribadi pemilik  lembaga penyiaran bersangkutan dan/atau kelompoknya'),
+(17, 10, 'SPS Pasal 11 (3)', 'Program siaran yang berisi tentang kesehatan masyarakat dilarang  menampilkan penyedia jasa pelayanan kesehatan masyarakat yang tidak  memiliki izin dari lembaga yang berwenang.'),
+(18, 11, 'SPS Pasal 12 (a)', 'program interaktif maupun dialog antarwarga yang mewadahi hak  warga negara agar dapat ikut berperan dalam pembangunan serta  menunjukkan kiprah positifnya dalam kehidupan bermasyarakat'),
+(19, 12, 'SPS Pasal 13 (1)', 'Program siaran wajib menghormati hak privasi dalam kehidupan pribadi  objek isi siaran'),
+(20, 12, 'SPS Pasal 13 (2)', 'Program siaran tentang permasalahan kehidupan pribadi tidak boleh  menjadi materi yang ditampilkan dan/atau disajikan dalam seluruh isi  mata acara, kecuali demi kepentingan publik'),
+(21, 12, 'SPS Pasal 13 (3)', 'Kepentingan publik sebagaimana dimaksud pada ayat (2) di atas terkait  dengan penggunaan anggaran negara, keamanan negara, dan/atau  permasalahan hukum pidana.'),
+(22, 12, 'SPS Pasal 14 (a)', 'tidak berniat merusak reputasi objek yang disiarkan'),
+(23, 12, 'SPS Pasal 14 (b)', 'tidak memperburuk keadaan objek yang disiarkan'),
+(24, 12, 'SPS Pasal 14 (c)', 'tidak mendorong berbagai pihak yang terlibat dalam konflik  mengungkapkan secara terperinci aib dan/atau kerahasiaan masingmasing pihak yang berkon'),
+(25, 12, 'SPS Pasal 14 (d)', 'tidak menimbulkan dampak buruk terhadap keluarga, terutama bagi  anak-anak dan remaja'),
+(26, 12, 'SPS Pasal 14 (e)', 'tidak dilakukan tanpa dasar fakta dan data yang akurat'),
+(27, 12, 'SPS Pasal 14 (f)', 'menyatakan secara eksplisit jika bersifat rekayasa, reka-ulang atau  diperankan oleh orang lain'),
+(28, 12, 'SPS Pasal 14 (g)', 'tidak menjadikan kehidupan pribadi objek yang disiarkan sebagai bahan  tertawaan dan/atau bahan cercaan; dan'),
+(29, 12, 'SPS Pasal 14 (h)', 'tidak boleh menghakimi objek yang disiarkan'),
+(30, 13, 'SPS Pasal 15 (1)', 'Program siaran wajib memperhatikan dan melindungi kepentingan anakanak dan/atau remaja.'),
+(31, 13, 'SPS Pasal 15 (2)', 'Program siaran yang berisi muatan asusila dan/atau informasi tentang  dugaan tindak pidana asusila dilarang menampilkan anak-anak dan/atau  remaja.'),
+(32, 13, 'SPS Pasal 15 (3)', 'Program siaran yang menampilkan anak-anak dan/atau remaja dalam  peristiwa/penegakan hukum wajib disamarkan wajah dan identitasnya.'),
+(33, 13, 'SPS Pasal 15 (4)', 'Program siaran langsung yang melibatkan anak-anak dilarang disiarkan  melewati pukul 21.30 waktu setempat.'),
+(34, 13, 'SPS Pasal 16 (1)', 'Program siaran dilarang melecehkan, menghina, dan/atau merendahkan  lembaga pendidikan. '),
+(35, 13, 'SPS Pasal 16 (2)', 'Penggambaran tentang lembaga pendidikan harus mengikuti ketentuan'),
+(36, 13, 'SPS Pasal 16 (2) (a)', 'tidak memperolok pendidik/pengajar; '),
+(37, 13, 'SPS Pasal 16 (2) (b)', 'tidak menampilkan perilaku dan cara berpakaian yang  bertentangan dengan etika yang berlaku di lingkungan pendidikan; '),
+(38, 13, 'SPS Pasal 16 (2) (c)', 'tidak menampilkan konsumsi rokok dan NAPZA (narkotika,  psikotropika, dan zat adiktif), dan minuman beralkohol'),
+(39, 13, 'SPS Pasal 16 (2) (d)', 'tidak menampilkan makian dan kata-kata kasar; dan/atau'),
+(40, 13, 'SPS Pasal 16 (2) (e)', 'tidak menampilkan aktivitas berjudi dan/atau tindakan kriminal  lainnya. '),
+(42, 14, '-', 'Menampilkan Klasifikasi Program Acara');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pelanggaran`
+-- Table structure for table `pelanggaran_radio`
 --
 
-CREATE TABLE `pelanggaran` (
-  `id_anggar` int(30) NOT NULL,
-  `nama_bab` varchar(3000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `pelanggaran_radio` (
+  `id_pelanggaran` int(11) NOT NULL,
+  `jenis_pelanggaran` varchar(244) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `pelanggaran`
+-- Dumping data for table `pelanggaran_radio`
 --
 
-INSERT INTO `pelanggaran` (`id_anggar`, `nama_bab`) VALUES
-(1, 'Penghormatan Terhadap Nilai-Nilai Kesukuan, Agama, Ras, dan Golongan'),
-(2, 'PENGHORMATAN TERHADAP NORMA KESOPANAN DAN KESUSILAAN'),
-(3, 'PENGHORMATAN TERHADAP ETIKA PROFESI'),
-(4, 'PERLINDUNGAN KEPENTINGAN PUBLIK'),
-(5, 'PROGRAM LAYANAN PUBLIK'),
-(6, 'PENGHORMATAN TERHADAP HAK PRIVASI'),
-(7, 'PERLINDUNGAN KEPADA ANAK (Bagian Pertama Perlindungan Anak-Anak dan Remaja)'),
-(8, 'PERLINDUNGAN KEPADA ANAK (Bagian Kedua\r\nProgram Siaran tentang Lingkungan Pendidikan)'),
-(9, 'PERLINDUNGAN KEPADA ORANG DAN MASYARAKAT TERTENTU'),
-(10, 'PELARANGAN DAN PEMBATASAN SEKSUALITAS (Bagian Pertama Pelarangan Adegan Seksual)'),
-(11, 'PELARANGAN DAN PEMBATASAN SEKSUALITAS (Bagian Kedua\r\nSeks di Luar Nikah, Praktek Aborsi, dan Pemerkosaan)'),
-(12, 'PELARANGAN DAN PEMBATASAN SEKSUALITAS (Bagian Ketiga\r\nMuatan Seks dalam Lagu dan Klip Video)'),
-(13, 'PELARANGAN DAN PEMBATASAN SEKSUALITAS (Bagian Keempat\r\nPerilaku Seks)'),
-(14, 'PELARANGAN DAN PEMBATASAN SEKSUALITAS (Bagian Kelima Program Bincang-bincang Seks)'),
-(15, 'PELARANGAN DAN PEMBATASAN KEKERASAN (Bagian Pertama Pelarangan Adegan Kekerasan)'),
-(16, 'PELARANGAN DAN PEMBATASAN KEKERASAN (Bagian Kedua\r\nUngkapan Kasar dan Makian)'),
-(17, 'PELARANGAN DAN PEMBATASAN KEKERASAN (Bagian Ketiga\r\nPembatasan Program Bermuatan Kekerasan)'),
-(18, 'PELARANGAN DAN PEMBATASAN MATERI SIARAN ROKOK, NAPZA, DAN MINUMAN BERALKOHOL (Bagian Pertama\r\nPelarangan Rokok, NAPZA, dan Minuman Beralkohol dalam Program Siaran)'),
-(19, 'PELARANGAN DAN PEMBATASAN MATERI SIARAN ROKOK, NAPZA, DAN MINUMAN BERALKOHOL (Pembatasan Rokok, NAPZA, dan Minuman Beralkohol dalam Program Siaran)'),
-(20, 'PELARANGAN DAN PEMBATASAN MUATAN PERJUDIAN (Bagian Pertama\r\nPelarangan Perjudian dalam Program Siaran)'),
-(21, 'PELARANGAN DAN PEMBATASAN MUATAN PERJUDIAN (Bagian Kedua\r\nPembatasan Perjudian dalam Program Siaran)'),
-(22, 'PELARANGAN DAN PEMBATASAN PROGRAM SIARAN BERMUATAN MISTIK, HOROR, DAN SUPRANATURAL (Bagian Pertama\r\nPelarangan Program Siaran Mistik, Horor, dan Supranatural)'),
-(23, 'PELARANGAN DAN PEMBATASAN PROGRAM SIARAN BERMUATAN MISTIK, HOROR, DAN SUPRANATURAL (Pembatasan Program Siaran Mistik, Horor, dan Supranatural)'),
-(24, 'PENGGOLONGAN PROGRAM SIARAN (Bagian Pertama Klasifikasi Program Siaran)'),
-(25, 'PENGGOLONGAN PROGRAM SIARAN (Bagian Kedua\r\nKlasifikasi P)'),
-(26, 'PENGGOLONGAN PROGRAM SIARAN (Bagian Ketiga Klasifikasi A)'),
-(27, 'PENGGOLONGAN PROGRAM SIARAN (Bagian Keempat Klasifikasi R)'),
-(28, 'PENGGOLONGAN PROGRAM SIARAN (Bagian Kelima Klasifikasi D)'),
-(29, 'PENGGOLONGAN PROGRAM SIARAN (Bagian Keenam\r\nKlasifikasi SU)'),
-(30, 'PROGRAM SIARAN JURNALISTIK (Bagian Satu\r\nPrinsip-Prinsip Jurnalistik )'),
-(31, 'PROGRAM SIARAN JURNALISTIK (Bagian Kedua\r\nPenggambaran Kembali)'),
-(32, 'PROGRAM SIARAN JURNALISTIK (Bagian Ketiga Muatan Kekerasan dan Kejahatan serta Kewajiban Penyamaran) '),
-(33, 'PROGRAM SIARAN JURNALISTIK (Bagian Keempat Peliputan Terorisme)'),
-(34, 'PROGRAM SIARAN JURNALISTIK (Bagian Kelima Peliputan Sidang Pengadilan, Kasus Hukum, dan Hukuman Mati)'),
-(35, 'PROGRAM SIARAN JURNALISTIK (Bagian Keenam\r\nPeliputan Bencana)'),
-(36, 'HAK SIAR'),
-(37, 'BAHASA, BENDERA, LAMBANG NEGARA, DAN LAGU KEBANGSAAN'),
-(38, 'SENSOR'),
-(39, 'PROGRAM SIARAN BERLANGGANAN'),
-(40, 'SIARAN IKLAN'),
-(41, 'PROGRAM ASING');
+INSERT INTO `pelanggaran_radio` (`id_pelanggaran`, `jenis_pelanggaran`) VALUES
+(2, 'PROGRAM LAYANAN PUBLIK'),
+(3, 'Lagu dengan Judul dan/atau lirik bermuatan seks, cabul dan/atau mengesankan aktivitas seks'),
+(4, 'Lagu dengan judul dan/atau lirik yang menjadikan perempuan sebagai objek seks'),
+(5, ' Suara yang menggambarkan berlangsungnya aktivitas seks dan/atau persenggamaan'),
+(6, 'Percakapan tentang rangkaian aktivitas seks dan/atau persenggamaan'),
+(7, 'Percakapan menggunakan kata-kata cabul'),
+(8, 'Bincang-bincang tentang seks yang tidak ada nilai edukasinya'),
+(9, 'Pemberitaan/informasi yang diambil dari internet dan belum tentu akurat'),
+(10, 'Program menjahili seseorang melalui telepon yang cenderung berlebihan'),
+(11, 'Candaan yang sarat makian dan kekerasan verbal'),
+(12, 'Candaan yang menggunakan istilah-istilah yang menjurus seksualitas'),
+(13, 'Candaan yang melecehkan kaum minorita'),
+(14, 'Iklan dengan konten dewasa di bawah pukul 22.00 WIB'),
+(15, 'Iklan rokok di bawah pukul 21.30 WIB'),
+(16, 'Program yang berisikan pembicaraan atau pembahasan mengenai masalah seks di luar pukul 22.00 â€“ 03.00 waktu setempat dengan tidak santun, tidak berhati-hati, tidak ilmiah dan tidak didampingi oleh praktisi kesehatan atau psikolog');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pprograms`
+-- Table structure for table `pelanggaran_tv`
 --
 
-CREATE TABLE `pprograms` (
-  `id_pprogs` int(50) NOT NULL,
-  `nama_stas` varchar(100) NOT NULL,
-  `progaca` varchar(100) NOT NULL,
-  `passal` varchar(50) NOT NULL,
-  `keterangann` varchar(400) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `pelanggaran_tv` (
+  `id_pelanggaran` int(11) NOT NULL,
+  `jenis_pelanggaran` varchar(255) NOT NULL,
+  `program_tv` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `pprograms`
+-- Dumping data for table `pelanggaran_tv`
 --
 
-INSERT INTO `pprograms` (`id_pprogs`, `nama_stas`, `progaca`, `passal`, `keterangann`) VALUES
-(4, 'KOMPAS TV', 'Terserah', 'SPS Pasal 33 (2)', 'Sip');
+INSERT INTO `pelanggaran_tv` (`id_pelanggaran`, `jenis_pelanggaran`, `program_tv`) VALUES
+(2, 'PROGRAM LAYANAN PUBLIK.', 1),
+(3, 'Klasifikasi Program Siaran', 2),
+(4, 'Perlindungan Anak-Anak dan Remaja', 2),
+(5, 'Pelarangan Adegan Kekerasan', 3),
+(6, 'Ungkapan Kasar dan Makian', 3),
+(7, 'Ungkapan Kasar dan Makian', 3),
+(8, 'Pelarangan Rokok, NAPZA, dan Minuman Beralkohol dalam Program Siaran', 4),
+(9, 'Pelarangan Adegan Seksual', 4),
+(10, 'Pelarangan Perjudian dalam Program Siaran', 5),
+(11, 'Pelarangan Perjudian dalam Program Siaran', 5),
+(12, 'Pelarangan Perjudian dalam Program Siaran', 5),
+(13, 'Pelarangan Program Siaran Mistik, Horor, dan Supranatural', 5),
+(14, 'Pelarangan Program Siaran Mistik, Horor, dan Supranatural', 1),
+(15, 'Pelarangan Perjudian dalam Program Siaran', 0),
+(16, 'Ungkapan Kasar dan Makian', 0),
+(17, 'Perlindungan Anak-Anak dan Remaja', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `programradio`
+-- Table structure for table `pengguna`
 --
 
-CREATE TABLE `programradio` (
-  `id_progradio` int(50) NOT NULL,
-  `program_radio` varchar(300) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `pengguna` (
+  `id_user` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `peran` enum('ADMIN','USER') NOT NULL,
+  `terakhir_login` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `programradio`
+-- Dumping data for table `pengguna`
 --
 
-INSERT INTO `programradio` (`id_progradio`, `program_radio`) VALUES
-(1, 'SORERAM, DANGSIK, PESONA ANTASARI, SENIN SANTUY, MALMING JHON, MORNING JHON'),
-(2, 'Bincang Santai/Talk Show'),
-(3, 'Tanya Jawab Agama Islam'),
-(4, 'Dangdut Kenangan dan Campur Sari'),
-(5, 'Dangdut Kenangan dan All Disc Pop Indonesia'),
-(6, 'Dangdut Hits dan Pop Era Tahun 1990 – 2000 '),
-(7, 'Dangdut, Ethnik (Campursari dan Banjar)'),
-(8, 'Info. Tips & Islam, Hiburan, Berita, Lagu, Siaran Kata'),
-(9, 'Serdut / Serba Dangdut'),
-(10, 'Campur Kendang'),
-(11, 'Nada Banua'),
-(12, 'Indonesia Lama '),
-(13, 'Hallo Indonesia, Musik'),
-(14, 'Film, Olahraga, Musik, Acara Anak-Anak '),
-(15, 'Musik Campur Sari Dangdut, Berita Pagi, Kerohanian'),
-(16, 'HALLO INDONESIA, WAYANG, PARIWISATA LOKAL, MUSIK'),
-(17, 'AL QUR’AN BY REQUEST'),
-(18, 'Keluarga harmonis, Peluang Usaha (Pulsa), Badadapatan'),
-(19, 'Request pagi-pagi, Daun muda, Special Program'),
-(20, 'Request pagi-pagi, Daun muda, Special Program'),
-(21, 'Begadang (berdendang) & Goyang Dangdut, WARJOK (Warung pojok), Kardut                                          (Karaoke dangdut)'),
-(22, 'Cafe musik, Kabar Kalimantan, Dangdut Nirwana'),
-(23, 'Rarampahan paacila, Klak klik ceria, Tombo Kangen'),
-(24, 'Bursa Musik, Ragam Family, Trendi (Trend Dangdut terkini)'),
-(25, 'Spirit kotabaru, Family & Pekerja, Mitra musik, Dendang bamega'),
-(26, 'Semarak dangdut, Kedai 15, Info petang'),
-(27, 'Habar Nirwana, Bahana Dangdut, Dendang banua'),
-(28, 'Planet nirwana, GODAM, Nirwana in D’morning'),
-(29, 'Warung senggol, Kiram Kirim, Patung Dangdut'),
-(30, ' HOT TOPIC PAGI & PETANG, POLEMIK, DAN THE\r\n LEADER'),
-(31, 'Lintas Banua');
+INSERT INTO `pengguna` (`id_user`, `username`, `password`, `peran`, `terakhir_login`) VALUES
+(1, 'admin', '$2y$10$baqQ4zTS37tzcjXzcU9GjO5.a.IIvc1OX1.kwHleKXxjVo9dZXDK2', 'ADMIN', '2023-02-03 08:21:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `programtv`
+-- Table structure for table `program_radio`
 --
 
-CREATE TABLE `programtv` (
-  `id_ptv` int(50) NOT NULL,
-  `nama_ptv` varchar(200) NOT NULL,
-  `id_stasiuntv` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `program_radio` (
+  `id_program` int(11) NOT NULL,
+  `nama_program` varchar(255) NOT NULL,
+  `radio` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `programtv`
+-- Dumping data for table `program_radio`
 --
 
-INSERT INTO `programtv` (`id_ptv`, `nama_ptv`, `id_stasiuntv`) VALUES
-(1, 'Kalimantan Selatan Sepekan', 1),
-(2, 'Kajian Tauhid', 1),
-(3, 'Pesona Indonesia', 1),
-(4, 'Sapa Pemirsa', 1),
-(5, 'Sitkom Acil Mardub', 1),
-(6, 'Duta Pagi', 2),
-(7, 'Duta Malam', 2),
-(8, 'Duta Banua', 2),
-(9, 'Sorotan Redaksi', 2),
-(10, 'Sorotan Redaksi', 2),
-(11, 'Kompas Kalsel', 3),
-(12, 'Sapa Kalsel', 3),
-(13, 'Etalase Banua', 3),
-(14, 'Bincang Sore', 3),
-(15, 'Resep Rahasia', 3),
-(16, 'Tukang Ojek Pengkolan', 4),
+INSERT INTO `program_radio` (`id_program`, `nama_program`, `radio`) VALUES
+(1, 'Bincang Santai/Talk Show', 1),
+(2, 'SORERAM, DANGSIK, PESONA ANTASARI, SENIN SANTUY, MALMING JHON, MORNING JHON', 3),
+(3, 'Tanya Jawab Agama Islam', 5),
+(4, 'Dangdut Kenangan dan Campur Sari', 6),
+(5, 'Dangdut Kenangan dan All Disc Pop Indonesia', 6),
+(6, 'Dangdut Hits dan Pop Era Tahun 1990 â€“ 2000', 6),
+(7, 'Dangdut, Ethnik (Campursari dan Banjar ), Informasi daerah &amp; sekitarnya', 7),
+(8, 'Info. Tips &amp; Islam, Hiburan, Berita, Lagu, Siaran Kata', 8),
+(9, 'SERDUT / SERBA DANGDUT', 10),
+(10, 'CAMPUR KENDANG', 11),
+(11, 'NADA BANUA', 12);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `program_tv`
+--
+
+CREATE TABLE `program_tv` (
+  `id_program` int(11) NOT NULL,
+  `nama_program` varchar(255) NOT NULL,
+  `tv` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `program_tv`
+--
+
+INSERT INTO `program_tv` (`id_program`, `nama_program`, `tv`) VALUES
+(1, 'Kalimantan Selatan Sepekan', 4),
+(2, 'Bincang Santai/Talk Show', 2),
+(3, 'Kajian Tauhid', 2),
+(4, 'Pesona Indonesia', 1),
+(5, 'Sapa Pemirsa', 1),
+(6, 'Sitkom Acil Mardub', 1),
+(7, 'Duta Pagi', 3),
+(8, 'Duta Malam', 3),
+(9, 'Duta Banua', 3),
+(10, 'Sorotan Redaksi', 3),
+(11, 'Majelis Sore', 3),
+(12, 'Kompas Kalsel', 2),
+(13, 'Sapa Kalsel', 2),
+(14, 'Etalase Banua', 2),
+(15, 'Bincang Sore', 2),
+(16, 'Resep Rahasia', 2),
 (17, 'Dunia Terbalik', 4),
 (18, 'Takut Ga Sih...', 4),
 (19, 'Cinta Alesha', 4),
-(20, 'Ikatan Cinta', 4);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_data_radio`
---
-
-CREATE TABLE `tb_data_radio` (
-  `id_radiu` int(70) NOT NULL,
-  `lps_radio` varchar(80) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tb_data_radio`
---
-
-INSERT INTO `tb_data_radio` (`id_radiu`, `lps_radio`) VALUES
-(1, 'PT. Radio Darul Musthofa ( MASA FM )'),
-(2, 'PT. Radio Suara Mandiri (J Radio)'),
-(3, 'PT. Radio Citra Bahana Swara (Ashbone FM)'),
-(4, 'PT. Radio Dhirgantara Permai (DBS FM)'),
-(5, 'PT. Radio Nusantara Antik (Nusantara FM)'),
-(6, 'PT. Radio Suara Banjar Lazuardi/SINDO Radio'),
-(7, 'PT. Radio Iskinada Mustika (Mustika FM)'),
-(8, 'PT. Radio Swara Maida Artanusa (SMART FM)'),
-(9, 'PT. Radio Nirwana'),
-(10, 'PT. Radio Kharismanada Rasisonia (Khana FM)'),
-(11, 'PT. Radio Telerama (I Radio)'),
-(12, 'PT. Radio Chandra Rasisonia (Chandra FM)'),
-(13, 'PT. Radio Citra Posindo (MC FM)'),
-(14, 'PT. Radio Citra Posindo (MC FM)'),
-(15, 'PT. Radio Allian Perdana Media ( SUN FM )'),
-(16, 'PT. Radio Citraswara Pelangi Indah (Pelangi FM)'),
-(17, 'PT. Radio Swara Kayutangi (SKY FM)');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_data_tv`
---
-
-CREATE TABLE `tb_data_tv` (
-  `id_tivi` int(100) NOT NULL,
-  `nama_tv` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tb_data_tv`
---
-
-INSERT INTO `tb_data_tv` (`id_tivi`, `nama_tv`) VALUES
-(1, 'TVRI'),
-(2, 'DUTA TV'),
-(3, 'RCTI'),
-(4, 'KOMPAS TV');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_langgar`
---
-
-CREATE TABLE `tb_langgar` (
-  `id_langgar` int(50) NOT NULL,
-  `namastas` varchar(100) NOT NULL,
-  `progjud` varchar(100) NOT NULL,
-  `bab` varchar(50) NOT NULL,
-  `judul` varchar(1000) NOT NULL,
-  `pasal` varchar(50) NOT NULL,
-  `keterangan` varchar(10000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tb_langgar`
---
-
-INSERT INTO `tb_langgar` (`id_langgar`, `namastas`, `progjud`, `bab`, `judul`, `pasal`, `keterangan`) VALUES
-(1, '', '', 'BAB I', 'KETENTUAN UMUM', 'SPS Pasal 1 (11)', 'Tidak Menyajikan Program Faktual'),
-(2, '', '', 'BAB XVII', 'PENGGOLONGAN PROGRAM SIARAN (Bagian Pertama Klasifikasi Program Siaran)', 'SPS Pasal 33 (2)', 'Tidak Menampilkan Klasifikasi Program Acara'),
-(4, 'Aasasas', 'asxasxas', 'saxasx', 'KETENTUAN UMUM', 'pasal 1', 'tuuuu'),
-(5, 'KOMPAS TV', 'sfcscscscs', 'BAB 1', 'KETENTUAN UMUM', 'SPS Pasal 33 (2)', 'Tidak menampilkan klasifikasi');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_options`
---
-
-CREATE TABLE `tb_options` (
-  `option_name` varchar(16) NOT NULL,
-  `option_value` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tb_options`
---
-
-INSERT INTO `tb_options` (`option_name`, `option_value`) VALUES
-('default_lat', '-8.251889'),
-('default_lng', '115.076818'),
-('default_zoom', '10');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_radio`
---
-
-CREATE TABLE `tb_radio` (
-  `id_radio` int(10) NOT NULL,
-  `penyiaran` varchar(40) NOT NULL,
-  `nama_stasiun_radio` varchar(30) NOT NULL,
-  `frekuensi` varchar(10) NOT NULL,
-  `prog_unggulan` varchar(100) NOT NULL,
-  `keterangan` varchar(100) NOT NULL,
-  `Pasal` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tb_radio`
---
-
-INSERT INTO `tb_radio` (`id_radio`, `penyiaran`, `nama_stasiun_radio`, `frekuensi`, `prog_unggulan`, `keterangan`, `Pasal`) VALUES
-(6, 'PT. Jhonlin Media Komunika', 'JHONLIN RADIO', '88.2 FM', 'SORERAM, DANGSIK, PESONA ANTASARI, SENIN SANTUY, MALMING JHON, MORNING JHON', 'Tidak ada', ''),
-(7, ' PT. Radio Suara Alkhair', 'Al Khair FM', 'FM 92,7 MH', 'Bincang Santai/Talk Show', 'Tidak ada', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_tv`
---
-
-CREATE TABLE `tb_tv` (
-  `id_tv` int(10) NOT NULL,
-  `hari` varchar(100) NOT NULL,
-  `tanggal` date NOT NULL,
-  `nama_stasiun` varchar(50) NOT NULL,
-  `jam_tayang` varchar(20) NOT NULL,
-  `program` varchar(200) NOT NULL,
-  `time_code` varchar(30) NOT NULL,
-  `keterangan` varchar(300) NOT NULL,
-  `pasal` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tb_tv`
---
-
-INSERT INTO `tb_tv` (`id_tv`, `hari`, `tanggal`, `nama_stasiun`, `jam_tayang`, `program`, `time_code`, `keterangan`, `pasal`) VALUES
-(7, 'Senin', '2023-01-16', 'TVRI KALSEL', '11.02 - 11.30', 'Kajian Tauhid', '11.02 - 11.30', 'Tidak menampilkan klasifikasi program acara', 'SPS Pasal 33 (2)');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_user`
---
-
-CREATE TABLE `tb_user` (
-  `id_user` int(11) NOT NULL,
-  `user` varchar(255) NOT NULL,
-  `pass` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tb_user`
---
-
-INSERT INTO `tb_user` (`id_user`, `user`, `pass`) VALUES
-(1, 'admin', 'admin');
+(20, 'Ikatan Cinta', 4),
+(26, 'Seputar iNews', 4),
+(27, 'Kompas Pagi', 2),
+(28, 'Kompas Siang', 2),
+(29, 'Kompas Petang', 2),
+(30, 'Breaking News', 2);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `pasal`
+-- Indexes for table `bab`
 --
-ALTER TABLE `pasal`
-  ADD PRIMARY KEY (`id_pasal`);
+ALTER TABLE `bab`
+  ADD PRIMARY KEY (`id_bab`);
 
 --
--- Indexes for table `pelanggaran`
+-- Indexes for table `data_radio`
 --
-ALTER TABLE `pelanggaran`
-  ADD PRIMARY KEY (`id_anggar`);
-
---
--- Indexes for table `pprograms`
---
-ALTER TABLE `pprograms`
-  ADD PRIMARY KEY (`id_pprogs`);
-
---
--- Indexes for table `programradio`
---
-ALTER TABLE `programradio`
-  ADD PRIMARY KEY (`id_progradio`);
-
---
--- Indexes for table `programtv`
---
-ALTER TABLE `programtv`
-  ADD PRIMARY KEY (`id_ptv`);
-
---
--- Indexes for table `tb_data_radio`
---
-ALTER TABLE `tb_data_radio`
-  ADD PRIMARY KEY (`id_radiu`);
-
---
--- Indexes for table `tb_data_tv`
---
-ALTER TABLE `tb_data_tv`
-  ADD PRIMARY KEY (`id_tivi`);
-
---
--- Indexes for table `tb_langgar`
---
-ALTER TABLE `tb_langgar`
-  ADD PRIMARY KEY (`id_langgar`);
-
---
--- Indexes for table `tb_options`
---
-ALTER TABLE `tb_options`
-  ADD PRIMARY KEY (`option_name`);
-
---
--- Indexes for table `tb_radio`
---
-ALTER TABLE `tb_radio`
+ALTER TABLE `data_radio`
   ADD PRIMARY KEY (`id_radio`);
 
 --
--- Indexes for table `tb_tv`
+-- Indexes for table `data_tv`
 --
-ALTER TABLE `tb_tv`
+ALTER TABLE `data_tv`
   ADD PRIMARY KEY (`id_tv`);
 
 --
--- Indexes for table `tb_user`
+-- Indexes for table `monitoring_radio`
 --
-ALTER TABLE `tb_user`
+ALTER TABLE `monitoring_radio`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `program` (`program`),
+  ADD KEY `pasal` (`pasal`),
+  ADD KEY `radio` (`radio`);
+
+--
+-- Indexes for table `monitoring_tv`
+--
+ALTER TABLE `monitoring_tv`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pasal` (`pasal`),
+  ADD KEY `program_tv` (`program`),
+  ADD KEY `tv` (`tv`);
+
+--
+-- Indexes for table `pasal`
+--
+ALTER TABLE `pasal`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_bab` (`id_bab`);
+
+--
+-- Indexes for table `pelanggaran_radio`
+--
+ALTER TABLE `pelanggaran_radio`
+  ADD PRIMARY KEY (`id_pelanggaran`);
+
+--
+-- Indexes for table `pelanggaran_tv`
+--
+ALTER TABLE `pelanggaran_tv`
+  ADD PRIMARY KEY (`id_pelanggaran`);
+
+--
+-- Indexes for table `pengguna`
+--
+ALTER TABLE `pengguna`
   ADD PRIMARY KEY (`id_user`);
+
+--
+-- Indexes for table `program_radio`
+--
+ALTER TABLE `program_radio`
+  ADD PRIMARY KEY (`id_program`),
+  ADD KEY `radio` (`radio`);
+
+--
+-- Indexes for table `program_tv`
+--
+ALTER TABLE `program_tv`
+  ADD PRIMARY KEY (`id_program`),
+  ADD KEY `tv` (`tv`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `bab`
+--
+ALTER TABLE `bab`
+  MODIFY `id_bab` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `data_radio`
+--
+ALTER TABLE `data_radio`
+  MODIFY `id_radio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `data_tv`
+--
+ALTER TABLE `data_tv`
+  MODIFY `id_tv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `monitoring_radio`
+--
+ALTER TABLE `monitoring_radio`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `monitoring_tv`
+--
+ALTER TABLE `monitoring_tv`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT for table `pasal`
 --
 ALTER TABLE `pasal`
-  MODIFY `id_pasal` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
--- AUTO_INCREMENT for table `pelanggaran`
+-- AUTO_INCREMENT for table `pelanggaran_radio`
 --
-ALTER TABLE `pelanggaran`
-  MODIFY `id_anggar` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+ALTER TABLE `pelanggaran_radio`
+  MODIFY `id_pelanggaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT for table `pprograms`
+-- AUTO_INCREMENT for table `pelanggaran_tv`
 --
-ALTER TABLE `pprograms`
-  MODIFY `id_pprogs` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `pelanggaran_tv`
+  MODIFY `id_pelanggaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT for table `programradio`
+-- AUTO_INCREMENT for table `pengguna`
 --
-ALTER TABLE `programradio`
-  MODIFY `id_progradio` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
-
---
--- AUTO_INCREMENT for table `programtv`
---
-ALTER TABLE `programtv`
-  MODIFY `id_ptv` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT for table `tb_data_radio`
---
-ALTER TABLE `tb_data_radio`
-  MODIFY `id_radiu` int(70) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
---
--- AUTO_INCREMENT for table `tb_data_tv`
---
-ALTER TABLE `tb_data_tv`
-  MODIFY `id_tivi` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `tb_langgar`
---
-ALTER TABLE `tb_langgar`
-  MODIFY `id_langgar` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `tb_radio`
---
-ALTER TABLE `tb_radio`
-  MODIFY `id_radio` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `tb_tv`
---
-ALTER TABLE `tb_tv`
-  MODIFY `id_tv` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `tb_user`
---
-ALTER TABLE `tb_user`
+ALTER TABLE `pengguna`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `program_radio`
+--
+ALTER TABLE `program_radio`
+  MODIFY `id_program` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `program_tv`
+--
+ALTER TABLE `program_tv`
+  MODIFY `id_program` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `monitoring_radio`
+--
+ALTER TABLE `monitoring_radio`
+  ADD CONSTRAINT `monitoring_radio_ibfk_1` FOREIGN KEY (`program`) REFERENCES `program_radio` (`id_program`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `monitoring_radio_ibfk_2` FOREIGN KEY (`pasal`) REFERENCES `pasal` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `monitoring_radio_ibfk_3` FOREIGN KEY (`radio`) REFERENCES `data_radio` (`id_radio`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `monitoring_tv`
+--
+ALTER TABLE `monitoring_tv`
+  ADD CONSTRAINT `monitoring_tv_ibfk_1` FOREIGN KEY (`pasal`) REFERENCES `pasal` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `monitoring_tv_ibfk_2` FOREIGN KEY (`program`) REFERENCES `program_tv` (`id_program`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `monitoring_tv_ibfk_3` FOREIGN KEY (`tv`) REFERENCES `data_tv` (`id_tv`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `pasal`
+--
+ALTER TABLE `pasal`
+  ADD CONSTRAINT `pasal_ibfk_1` FOREIGN KEY (`id_bab`) REFERENCES `bab` (`id_bab`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `program_radio`
+--
+ALTER TABLE `program_radio`
+  ADD CONSTRAINT `program_radio_ibfk_1` FOREIGN KEY (`radio`) REFERENCES `data_radio` (`id_radio`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `program_tv`
+--
+ALTER TABLE `program_tv`
+  ADD CONSTRAINT `program_tv_ibfk_1` FOREIGN KEY (`tv`) REFERENCES `data_tv` (`id_tv`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
